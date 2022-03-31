@@ -1,6 +1,8 @@
 import { url } from 'inspector'
 import Head from 'next/head'
 import Header from '../components/Header'
+import Image from "next/image";
+import SmallGalery from '../components/SmallGalery';
 
 
 export default function Home() {
@@ -14,9 +16,36 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="" style={{backgroundImage:"url(./fondo-header.jpg)"}}>
-				<Header/>
+			<div className="bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{backgroundImage:"url(/fondo-header.jpg)"}}>
+				<Header className='mb-10'/>
+
+				<div className='flex gap-10 justify-center items-center flex-col lg:flex-row lg:items-start'>
+					<div className="pt-24 ">
+						<div className="transition hover:scale-110">
+							<Image src="/edificios.jpg" width={320} height={384} alt="edificios"/>
+						</div>
+					</div>
+					<div className="">
+						<div className="transition hover:scale-110">
+							<Image src="/persona-puente.jpg" width={320} height={384} alt="persona puente"/>
+						</div>
+					</div>
+					<div className="pt-36 ">
+						<div className='transition hover:scale-110'>
+							<Image src="/paraguas.jpg" width={320} height={384} alt="paraguas"/>
+						</div>
+					</div>
+				</div>
 				
+			</div>
+
+			<div>
+
+			</div>
+
+			
+			<div className=''>
+				<SmallGalery/>
 			</div>
 
 

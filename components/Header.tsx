@@ -2,13 +2,17 @@ import Link from "next/link";
 import Logo from "./Logo";
 import Image from "next/image";
 
-export default function Header() {
+interface HeaderProps {
+    className?: string
+}
+export default function Header({ className }: HeaderProps) {
 
 
     return (
         <>
-            <div className=" flex flex-row justify-around bg-black">
-                <Logo />
+            <div className={` flex flex-row justify-around ${className} `}>
+                <Link href="/"><a><Logo /></a></Link>
+
 
                 <div className="flex gap-6 items-center text-white">
                     <Link href="/"><a className="transition hover:scale-125 " >Inicio</a></Link>
@@ -18,8 +22,8 @@ export default function Header() {
                 </div>
 
                 <div className="flex gap-6 items-center text-white">
-                    <Link href="/"><a className="transition hover:scale-125" > <Image src="/bxs-cart.svg" width={30} height={30}/></a></Link>
-                    <Link href="/"><a className="transition hover:scale-125" > <Image src="/bx-user.svg" width={30} height={30}/></a></Link>
+                    <Link href="/"><a className="transition hover:scale-125" > <Image src="/bx-user.svg" width={30} height={30} /></a></Link>
+                    <Link href="/"><a className="transition hover:scale-125" > <Image src="/bxs-cart.svg" width={30} height={30} /></a></Link>
 
                 </div>
             </div>

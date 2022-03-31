@@ -12,7 +12,7 @@ export default function Contact() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <Header className='bg-black'/>
             <h1 className="text-4xl text-center my-10">Contacto</h1>
             <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
                 formulario
