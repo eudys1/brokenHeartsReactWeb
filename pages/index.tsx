@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import Image from "next/image";
 import SmallGalery from '../components/SmallGalery';
+import Link from 'next/link';
+import Footer from '../components/Footer';
 
 
 export default function Home() {
@@ -16,39 +18,52 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{backgroundImage:"url(/fondo-header.jpg)"}}>
-				<Header className='mb-10'/>
+			<div className="bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{ backgroundImage: "url(/fondo-header.jpg)" }}>
+				<Header className='justify-between mx-32 mb-10' />
 
 				<div className='flex gap-10 justify-center items-center flex-col lg:flex-row lg:items-start'>
 					<div className="pt-24 ">
-						<div className="transition hover:scale-110">
-							<Image src="/edificios.jpg" width={320} height={384} alt="edificios"/>
+						<div className="transition duration-500 hover:scale-110">
+							<Image src="/edificios.jpg" width={320} height={384} alt="edificios" />
 						</div>
 					</div>
 					<div className="">
-						<div className="transition hover:scale-110">
-							<Image src="/persona-puente.jpg" width={320} height={384} alt="persona puente"/>
+						<div className="transition duration-500 hover:scale-110">
+							<Image src="/persona-puente.jpg" width={320} height={384} alt="persona puente" />
 						</div>
 					</div>
 					<div className="pt-36 ">
-						<div className='transition hover:scale-110'>
-							<Image src="/paraguas.jpg" width={320} height={384} alt="paraguas"/>
+						<div className='transition duration-500 hover:scale-110'>
+							<Image src="/paraguas.jpg" width={320} height={384} alt="paraguas" />
 						</div>
 					</div>
 				</div>
-				
-			</div>
-
-			<div>
 
 			</div>
 
-			
+			<div className="w-4/5 mx-auto py-10 my-5 flex border-b-2 border-zinc-300  flex-col items-center	font-['Arial'] text-[18px]">
+				<p>¡HOLA!,</p>
+				<p>Mi nombre es Jesús y soy fotógrafo.</p>
+				<p>Bienvenida, Bienvenido, llegaste a un lugar donde hay mucho por recorrer.</p>
+			</div>
+
+
 			<div className=''>
-				<SmallGalery/>
+				<SmallGalery />
 			</div>
 
 
+			<div className="w-4/5 mx-auto py-10 my-5 flex border-t-2 border-zinc-300  flex-col items-center	font-['Arial'] text-[18px] text-center">
+				<p>Para más información sobre reservas de sesiones, proximos</p>
+				<p>projectos y más visita mi Instagram.</p>
+				<p>También puedes ver la <Link href="/Shop"><span className='text-[#2286FF] cursor-pointer'>Tienda</span></Link> y ver el merch de la marca</p>
+				<p>que tenemos disponible.</p>
+			</div>
+
+
+			<div className='bg-black'>
+				<Footer className='text-center lg:text-left' />
+			</div>
 		</div>
 	)
 }
