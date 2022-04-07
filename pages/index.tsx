@@ -6,6 +6,7 @@ import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 
+// TODO: create image component 
 
 export default function Home() {
 

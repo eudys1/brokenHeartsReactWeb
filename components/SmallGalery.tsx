@@ -9,7 +9,7 @@ export default function SmallGalery() {
             <div className=' p-10'>
                 <div className="flex gap-10 mb-10 justify-center items-center flex-col lg:flex-row lg:items-start">
 
-                    <div className='transition duration-500 hover:scale-110'>
+                    <div className='transition duration-500 hover:backdrop-grayscale'>
                         <Image src="/marta.jpg" width={250} height={300} alt="marta" />
                     </div>
 

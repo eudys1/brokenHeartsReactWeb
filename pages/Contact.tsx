@@ -1,5 +1,16 @@
 import Head from 'next/head'
 import Header from "../components/Header";
+import { Formik, Field, Form, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
+
+const FormValidation = Yup.object().shape({
+    nombre: Yup.string().required("Introduce un nombre"),
+    apellidos: Yup.string(),
+    email: Yup.string().email("Introduce un email válido").required("Introduce un email"),
+    privacityPolicy: Yup.boolean().oneOf([true], 'Debes aceptar las políticas de privacidad').required(),
+
+});
+
 
 export default function Contact() {
 
@@ -12,10 +23,44 @@ export default function Contact() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header className='bg-black'/>
+            <Header className='bg-black' />
+
             <h1 className="text-4xl text-center my-10">Contacto</h1>
-            <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
-                formulario
+            <div className="w-[600px] h-[700px] m-auto bg-white rounded-lg p-7">
+                <Formik
+                    initialValues={{ nombre: "", apellidos: "", email: "", privacityPolicy: false, }}
+                    onSubmit={(e) => alert(JSON.stringify(e))}
+                    validationSchema={FormValidation}
+                >
+                    <Form>
+
+                        <label >
+                            Nombre:
+                            <Field name="nombre" type="text" placeholder="Nombre" />
+                        </label>
+
+                        <label >
+                            Apellidos:
+                            <Field name="apellidos" type="text" placeholder="Apellidos" />
+                        </label>
+
+                        <label >
+                            Email:
+                            <Field name="email" type="email" placeholder="example@gmail.com" />
+                        </label>
+
+                        <label >
+                            <Field name="privacityPolicy" type="checkbox" />
+                            He leído y acepto la políticas de privacidad.
+                        </label>
+
+                        <button type="submit">Enviar</button>
+                    </Form>
+
+
+                </Formik>
+
+
             </div>
         </>
     )
