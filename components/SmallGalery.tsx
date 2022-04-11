@@ -1,34 +1,24 @@
-import Image from "next/image";
+import ImageComponent from "./ImageComponent";
 
 
 export default function SmallGalery() {
 
 
     return (
-        <>
-            <div className=' p-10'>
-                <div className="flex gap-10 mb-10 justify-center items-center flex-col lg:flex-row lg:items-start">
 
-                    <div className='transition duration-500 hover:backdrop-grayscale'>
-                        <Image src="/marta.jpg" width={250} height={300} alt="marta" />
-                    </div>
+        <div className=' p-10'>
+            <div className="flex gap-10 mb-10 justify-center items-center flex-col lg:flex-row lg:items-start">
 
-                    <div className='transition duration-500 hover:scale-110'>
-                        <Image src="/jaime.jpg" width={300} height={300} alt="jaime" />
-                    </div>
+                <ImageComponent src={"/marta.jpg"} width={250} height={300} alt={"marta"} scale={true} />
+                <ImageComponent src={"/jaime.jpg"} width={300} height={300} alt={"jaime"} scale={true} />
+                <ImageComponent src={"/3personas-skate.jpg"} width={250} height={300} alt={"3 personas en skate"} scale={true} />
 
-                    <div className='transition duration-500 hover:scale-110'>
-                        <Image src="/3personas-skate.jpg" width={250} height={300} alt="3personas en skate" />
-                    </div>
-
-                </div>
-
-                <div className="flex justify-center items-center">
-                    <div className='transition duration-500 hover:scale-110'>
-                        <Image src="/alberto.jpg" width={880} height={290} alt="alberto" />
-                    </div>
-                </div>
             </div>
-        </>
+
+            <div className="flex justify-center items-center">
+                <ImageComponent src={"/alberto.jpg"} width={880} height={290} alt={"alberto"} scale={false} />
+            </div>
+        </div>
+
     )
 }

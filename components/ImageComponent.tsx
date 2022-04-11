@@ -9,15 +9,16 @@ interface ImageComponentProps {
     className?: string;
 }
 
+//TODO: when clik open modal
 
 export default function ImageComponent({ src, width, height, alt, scale, className }: ImageComponentProps) {
 
 
     return (
-        <>
-            <div className={`${scale ? 'transition duration-500 hover:scale-110': 'transition duration-500 hover:backdrop-grayscale '}  ${className} `}>
-                <Image src={src} width={width} height={height} alt={alt} />
-            </div>
-        </>
+
+        <div className={`${scale ? 'transition duration-500 hover:scale-110' : 'transition duration-300 hover:grayscale hover:brightness-50 '}  ${className} `}>
+            <Image src={src} width={width} height={height} alt={alt} />
+        </div>
+
     )
 }

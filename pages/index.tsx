@@ -6,10 +6,9 @@ import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 
-// TODO: create image component 
+
 
 export default function Home() {
-
 
 	return (
 		<div className="">
@@ -33,7 +32,7 @@ export default function Home() {
 							<Image src="/persona-puente.jpg" width={320} height={384} alt="persona puente" />
 						</div>
 					</div>
-					<div className="pt-36 ">
+					<div className="md:pt-36 ">
 						<div className='transition duration-500 hover:scale-110'>
 							<Image src="/paraguas.jpg" width={320} height={384} alt="paraguas" />
 						</div>
