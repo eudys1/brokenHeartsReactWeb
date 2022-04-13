@@ -2,13 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+  @variants responsive {
+    .masonry-3-col {
+      column-count: 3;
+      column-gap: 1em;
+    }
+
+    .masonry-2-col {
+      column-count: 2;
+      column-gap: 1em;
+    }
+
+    .break-inside {
+      break-inside: avoid;
+    }
+  }
+
+  .mansory {
+    -webkit-column-count: 4;
+
+    -moz-column-count: 4;
+
+    column-count: 4;
+
+    -webkit-column-width: 25%;
+
+    -moz-column-width: 25%;
+
+    column-width: 25%;
+
+    padding: 0 12px;
+  }
+
+  .mansory2 {}
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-    background-color:#ededed;
+  background-color: #ededed;
 }
 
 a {

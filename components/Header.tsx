@@ -16,7 +16,7 @@ export default function Header({ className }: HeaderProps) {
 
                 <div className="hidden lg:flex gap-6 items-center text-white ">
                     <Link href="/"><a className="transition duration-300 hover:scale-125 " >Inicio</a></Link>
-                    <Link href="/"><a className="transition duration-300 hover:scale-125" >Fotografía</a></Link>
+                    <Link href="/Photografy"><a className="transition duration-300 hover:scale-125" >Fotografía</a></Link>
                     <Link href="/"><a className="transition duration-300 hover:scale-125" >Tienda</a></Link>
                     <Link href="/Contact"><a className="transition duration-300 hover:scale-125 " >Contacto</a></Link>
 

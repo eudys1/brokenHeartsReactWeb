@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 const FormValidation = Yup.object().shape({
     nombre: Yup.string().required("Introduce un nombre"),
     apellidos: Yup.string(),
+    archivo:Yup.mixed(),
     dudas: Yup.string(),
     email: Yup.string().email("Introduce un email válido").required("Introduce un email"),
     privacityPolicy: Yup.boolean().oneOf([true], 'Debes aceptar las políticas de privacidad').required(),
@@ -15,16 +16,17 @@ const FormValidation = Yup.object().shape({
 //TODO: use sendGrid and api from next to meke usefull this form
 
 export default function Contact() {
-    async function handleOnSubmit(e:FormikValues) {
+    async function handleOnSubmit(e: FormikValues) {
         // e.preventDefault();
-        const allContactData= e;
+        const allContactData = e;
 
-        fetch('/api/mail', {
-            method:'POST',
+        await fetch('/api/mail', {
+            method: 'POST',
             body: JSON.stringify(allContactData),
         })
-        console.log("No api",allContactData);
-        
+
+        console.log("No api", allContactData);
+
     }
 
     return (
@@ -41,7 +43,7 @@ export default function Contact() {
 
             <div className="w-[600px] mx-auto bg-white rounded-lg py-7 px-10 my-10">
                 <Formik
-                    initialValues={{ nombre: "", apellidos: "", email: "", dudas: "", privacityPolicy: false, }}
+                    initialValues={{ nombre: "", apellidos: "", email: "", dudas: "", privacityPolicy: false, archivo:undefined }}
                     onSubmit={handleOnSubmit}
                     validationSchema={FormValidation}
                 >
@@ -53,6 +55,7 @@ export default function Contact() {
                         </div>
 
                         <Field name="apellidos" type="text" placeholder="Apellidos" className="w-full bg-[#e9f1fe] mb-[25px] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
+                        <input name="archivo" type="file" placeholder="Apellidos" />
 
                         <Field name="email" type="email" placeholder="Email *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
                         <div className="min-h-[25px]">
