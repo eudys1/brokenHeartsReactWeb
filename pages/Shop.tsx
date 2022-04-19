@@ -13,7 +13,10 @@ export default function Shop() {
                 
             </Head>
 
-            <Header className='bg-black'/>
+            <div className="bg-black">
+                <Header className=' justify-between mx-32 mb-10' />
+            </div>
+            
             <h1 className="text-4xl text-center my-10">Tienda</h1>
             <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
                 tienda

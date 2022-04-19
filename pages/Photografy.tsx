@@ -14,7 +14,9 @@ export default function Photografy() {
                 
             </Head>
 
-            <Header className='bg-black'/>
+            <div className="bg-black">
+                <Header className=' justify-between mx-32 mb-10' />
+            </div>
 
             <h1 className="text-4xl text-center my-10">Fotografia</h1>
 

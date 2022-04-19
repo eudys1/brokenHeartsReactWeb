@@ -21,7 +21,7 @@ export default function Header({ className }: HeaderProps) {
                     <Link href="/Contact"><a className="transition duration-300 hover:scale-125 " >Contacto</a></Link>
 
  
-                    <Link href="/"><a className=" pl-10 transition duration-300 hover:scale-125 w-max" > <Image src="/bx-user.svg" width={30} height={30} /></a></Link>
+                    <Link href="/Account"><a className=" pl-10 transition duration-300 hover:scale-125 w-max" > <Image src="/bx-user.svg" width={30} height={30} /></a></Link>
                     <Link href="/"><a className="transition duration-300 hover:scale-125 w-max" > <Image src="/bxs-cart.svg" width={30} height={30} /></a></Link>
 
                 </div>

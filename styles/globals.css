@@ -4,7 +4,7 @@
 
 
 @layer utilities {
-  @variants responsive {
+  
     .masonry-3-col {
       column-count: 3;
       column-gap: 1em;
@@ -18,8 +18,7 @@
     .break-inside {
       break-inside: avoid;
     }
-  }
-
+  
   .mansory {
     -webkit-column-count: 4;
 
@@ -38,6 +37,9 @@
 
   .mansory2 {}
 }
+
+
+
 
 html,
 body {
