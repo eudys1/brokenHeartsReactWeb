@@ -21,7 +21,9 @@ export default function Photografy() {
             <h1 className="text-4xl text-center my-10">Fotografia</h1>
 
             <div className="max-w-[90%] m-auto">
+
                 <Gallery/>
+                
             </div>
         </>
     )

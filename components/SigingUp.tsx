@@ -1,7 +1,7 @@
 import { Formik, Field, Form, FormikHelpers, ErrorMessage, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
-import firebaseInit from '../firebase';
+import {firebaseInit} from '../firebase';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 

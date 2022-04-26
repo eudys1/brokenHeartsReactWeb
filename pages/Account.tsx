@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
-import firebaseInit from "../firebase";
+import {firebaseInit} from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { User as FirebaseUser } from "firebase/auth";
@@ -34,7 +34,6 @@ export default function Account() {
         getFirestoreUserData(firebaseUser.uid).then(userInfo => {
 
             if (!userInfo) return;
-            // console.log("firebaseUser: ",userInfo);
             
             const userData: any = {
                 uid: firebaseUser.uid,
@@ -45,7 +44,6 @@ export default function Account() {
             };
 
             setUser(userData);
-            // console.log("jjjjjjjj", userData);
 
         });
     }
