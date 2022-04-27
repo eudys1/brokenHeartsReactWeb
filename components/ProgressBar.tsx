@@ -4,8 +4,8 @@ import useStorage from "../hooks/useStorage"
 export default function ProgressBar(file:any, setFile:Function) {
     console.log("me he ejecutado bar");
     
-    const {url, progress} = useStorage(file);
-    console.log(progress, url);
+    const [url, progress] = useStorage(file);
+    // console.log(progress, url);
     
     // useEffect( () => {
     //     if(url){

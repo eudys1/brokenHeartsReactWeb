@@ -21,7 +21,7 @@ export default function useStorage(file: any) {
             // 
             const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-            console.log(snapshot.bytesTransferred, snapshot.totalBytes);
+            // console.log(snapshot.bytesTransferred, snapshot.totalBytes);
 
             console.log('Upload is ' + percentage + '% done');
             setProgress(percentage);
@@ -46,6 +46,6 @@ export default function useStorage(file: any) {
 
     }, [file]);
 
-    return { progress, url, error };
+    return [ progress, url, error ];
 }
 
