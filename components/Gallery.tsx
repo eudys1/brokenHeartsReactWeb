@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useFirestorage } from "../hooks/useFirestorage";
 import ImageComponent from "./ImageComponent";
-import ProgressBar from "./ProgressBar";
+// import ProgressBar from "./ProgressBar";
+import UploadImage from "./UploadImage";
 
 
 
@@ -8,15 +10,17 @@ export default function Gallery() {
 
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
+    const {docs} = useFirestorage('galleryImages');
 
     const typesPermited = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg'];
 
     const handleUpload = (e: any) => {
         //no multiple files allowed
-        let selected = e.target.files[0];
+        let fileSelected = e.target.files[0];
 
-        if (selected && typesPermited.includes(selected.type)) {
-            setFile(selected);
+        if (fileSelected && typesPermited.includes(fileSelected.type)) {
+            UploadImage(fileSelected);
+            setFile(fileSelected);
             setError('');
         } else {
             setFile(null);
@@ -24,7 +28,8 @@ export default function Gallery() {
         }
 
     }
-
+    console.log(docs);
+    
     return (
         <>
             <form action="" className="w-fit mx-auto">
@@ -40,7 +45,7 @@ export default function Gallery() {
             } */}
 
             {error && <p className="text-red-500 text-center">{error}</p>}
-            {file && <ProgressBar file={file} setFile={setFile} />}
+            {/* {file && <ProgressBar file={file} setFile={setFile} />} */}
 
 
             <div className={` md:masonry-2-col lg:masonry-3-col box-border mx-auto before:box-inherit after:box-inherit `}>
