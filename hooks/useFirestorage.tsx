@@ -1,37 +1,30 @@
-import { getFirestore, collection, onSnapshot, doc } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, doc, getDocs, query } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { firebaseInit } from "../firebase";
 
-export const useFirestorage = (collectionName: any) => {
-    const [docs, setDocs] = useState([]);
+//TODO: use try and catch
+//TODO: check dependencies in useEffect
+export const useFirestorage = (collectionName: string) => {
+
+    const [docs, setDocs] = useState<Array<any>>([]);
 
     useEffect(() => {
         const firestore = getFirestore(firebaseInit);
-        const collectionRef = collection(firestore, "galleryImages");
+        const collectionRef = collection(firestore, collectionName);
 
-        // const unsub2 = onSnapshot( doc(collection(firestore, "galleryImages")), (snapshot:any) => {
-        //     let document:Array<any> = [];
+        const getCollectionData = onSnapshot(query(collectionRef), (querySnapshot) => {
+            const documents: Array<any> = [];
+            querySnapshot.forEach((doc) => {
+                documents.push({ ...doc.data(), id: doc.id });
+            });
 
-        //     snapshot.forEach((doc: any) => {
-        //         document.push({ ...doc.data(), id: doc.id });
-        //     });
-        //     setDocs(document);
-        // });
+            setDocs(documents);
+        });
 
+        return () => getCollectionData();
 
-        // const unsub = collectionRef.onSnapshot((snapshot: any) => {
-        //     let document = [];
-
-        //     snapshot.forEach((doc: any) => {
-        //         document.push({ ...doc.data(), id: doc.id });
-        //     });
-
-        // });
-
-        // return () => unsub();
-        
-    }, [collectionName]);
+    }, []);
 
 
-    return { docs }
+    return [docs]
 }
