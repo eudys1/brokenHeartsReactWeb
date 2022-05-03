@@ -8,7 +8,7 @@ import { firebaseInit } from "../firebase";
 export default function UploadImage(file: any) {
 
     console.log(file);
-    
+
     // const [error, setError] = useState(null);
     // const [url, setUrl] = useState(null);
     // const [progress, setProgress] = useState(0);
@@ -17,23 +17,23 @@ export default function UploadImage(file: any) {
     const storageRef = ref(storage, file.name);
     console.log("me he ejecutado hook");
 
-    try{
+    try {
         uploadBytes(storageRef, file).then(
             async () => {
-                //
+
                 console.log("url image done");
                 await getDownloadURL(storageRef).then((url: any) => {
                     // setUrl(url);
-    
+
                     //save the url in firestore
                     const docRef = doc(collection(firestore, "galleryImages"));
                     setDoc(docRef, { url: url, name: file.name });
-    
+
                 });
             }
         );
 
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 

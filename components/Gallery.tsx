@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFirestorage } from "../hooks/useFirestorage";
 import ImageComponent from "./ImageComponent";
 import Image from "next/image";
@@ -6,12 +6,42 @@ import Image from "next/image";
 import UploadImage from "./UploadImage";
 
 
+//get with and height of image
+const getImageSize = (url: string) => {
+    return new Promise((resolve, reject) => {
+        let img = new window.Image();
+        let wi;
+        let he;
+        img.onload = () => {
+            resolve({ width: img.naturalWidth, height: img.naturalHeight });
+            wi = img.naturalWidth;
+            he = img.naturalHeight;
+        };
+        img.onerror = () => {
+            reject(new Error("Error loading image"));
+        };
+        img.src = url;
+        // console.log(wi, he);
+
+    });
+};
+
+async function runGetImageSize(url: string) {
+
+    let img = await getImageSize(url);
+
+    // console.log("dddd: ", img);
+    return img;
+
+}
 
 export default function Gallery() {
 
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
     const [docs] = useFirestorage('galleryImages');
+    // let size: any[] = [];
+    const [size, setSize] = useState<Array<any>>([]);
 
     const typesPermited = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg'];
 
@@ -30,6 +60,27 @@ export default function Gallery() {
 
     }
 
+    useEffect(() => {
+        
+        {
+            docs &&
+                docs.map(async(doc: any) => {
+                    // console.log(doc);
+                    let x:any = await runGetImageSize(doc.url);
+                    console.log("x: ", x.width);
+                    // setSize(size.push(x));
+                    size.push(x);
+                    
+                });
+        }
+
+        console.log("aaaaa", size);
+        console.log("aaaaa", size[2]);
+
+    },[docs]);
+
+    // console.log("size: ", size);
+    
     return (
         <>
             <form action="" className="w-fit mx-auto">
@@ -53,12 +104,15 @@ export default function Gallery() {
 
                 {
                     docs &&
-                    docs.map((doc: any) => {
+                    docs.map((doc: any, index) => {
+                        // console.log("size", size);
+                        
                         return (
-                            <div key={doc.id} className="relative my-4 ">
-                                {/* <p>{doc.url}</p> */}
-                                {/* <Image src={doc.url} alt={doc.name} layout="fill" className="w-full h-full object-cover" /> */}
-                                <img className="" src={`${doc.url}`}  alt={doc.name} />
+
+                            <div key={doc.id} className="  ">
+                                {/* <Image key={doc.id}src={doc.url} alt={doc.name}  objectFit="contain" className="" /> */}
+                                <img className="pt-3" src={`${doc.url}`} alt={doc.name} />
+                                {/* <Image src={doc.url} alt={doc.name} width={size[index].width} height={size[index].height}/> */}
                             </div>
                         );
                     })
