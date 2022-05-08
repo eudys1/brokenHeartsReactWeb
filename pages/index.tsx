@@ -5,6 +5,7 @@ import Image from "next/image";
 import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
 import Footer from '../components/Footer';
+import Contact from './Contact';
 
 
 
@@ -52,19 +53,35 @@ export default function Home() {
 				<SmallGalery />
 			</div>
 
+			<div className="max-w-[85%] mx-auto flex flex-col md:flex-row gap-8 md:gap-0 border-t-2 border-zinc-300 py-10 font-['Arial']">
+
+
+				<div className="md:pt-16 flex flex-col  md:w-1/2 px-5 text-center md:text-right	gap-4 md:order-last ">
+					<h3 className='text-2xl text-[#f56c95]'>¿Tienes dudas?</h3>
+					<h1 className='text-5xl font-bold text-[#2286FF]'>Contacta con nosotros</h1>
+					<p className=''>Puedes contactar con nosotros a través del siguiente formulario para dudas sobre nuestro trabajo, sesiones de fotos, productos de nuestra web, etc.</p>
+				</div>
+
+				<div className="md:w-1/2 px-5 ">
+					<Contact />
+				</div>
+			</div>
+
 
 			<div className="w-4/5 mx-auto py-10 my-5 flex border-t-2 border-zinc-300  flex-col items-center	font-['Arial'] text-[18px] text-center">
 				<p>Para más información sobre reservas de sesiones, proximos</p>
-				<p>projectos y más visita mi Instagram.</p>
-				<p>También puedes ver la <Link href="/Shop"><span className='text-[#2286FF] cursor-pointer'>Tienda</span></Link> y ver el merch de la marca</p>
+				<p>projectos y más visita mi Instagram o constacanos usando el formulario de arriba.</p>
+				<p>También puedes visitar nuestra <Link href="/Shop"><span className='text-[#2286FF] cursor-pointer'>Tienda</span></Link> y ver el merch de la marca</p>
 				<p>que tenemos disponible.</p>
 			</div>
+
+
 
 
 			<div className='bg-black'>
 				<Footer className='text-center lg:text-left' />
 			</div>
-		</div>
+		</div >
 	)
 }
 
