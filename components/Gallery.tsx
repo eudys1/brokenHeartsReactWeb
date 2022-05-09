@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useFirestorage } from "../hooks/useFirestorage";
 import ImageComponent from "./ImageComponent";
 import Image from "next/image";
-// import ProgressBar from "./ProgressBar";
 import UploadImage from "./UploadImage";
 
 
