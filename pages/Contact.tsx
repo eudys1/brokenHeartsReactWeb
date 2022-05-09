@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Header from "../components/Header";
-import { Formik, Field, Form, FormikHelpers, ErrorMessage, FormikValues } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FormikValues } from 'formik';
 import * as Yup from 'yup';
 
 const FormValidation = Yup.object().shape({
@@ -51,6 +51,7 @@ export default function Contact() {
                     <Form>
 
                         <Field name="nombre" type="text" placeholder="Nombre *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
+                        
                         <div className="min-h-[25px]">
                             <ErrorMessage name="nombre" component="p" className='text-[#ff0000]' />
                         </div>

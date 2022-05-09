@@ -1,4 +1,4 @@
-import firebaseInit from "../firebase";
+import {firebaseInit} from "../firebase";
 import { getAuth, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
