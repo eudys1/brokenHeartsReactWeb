@@ -37,27 +37,35 @@ export default function Login(className?: any) {
                     onSubmit={handleOnSubmit}
                     validationSchema={FormValidation}
                 >
-                    <Form>
-                        <h1 className="text-2xl font-bold text-center my-3">Iniciar sesión</h1>
+                    {(formik) => {
+                        const { errors, touched, isValid, dirty } = formik;
+                        return (
+                            <Form>
+                                <h1 className="text-2xl font-bold text-center my-3">Iniciar sesión</h1>
 
-                        <Field name="email" type="email" placeholder="Email *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
-                        <div className="min-h-[25px]">
-                            <ErrorMessage name="email" component="p" className='text-[#ff0000]' />
-                        </div>
+                                <Field name="email" type="email" placeholder="Email *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
+                                <div className="min-h-[25px]">
+                                    {/* <ErrorMessage name="email" component="p" className='text-[#ff0000]' /> */}
+                                    {errors.email && touched.email && (<span className="text-[#ff0000]">{errors.email}</span>)}
 
-                        <Field name="password" type="password" placeholder="Contraceña *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
-                        <div className="min-h-[25px]">
-                            <ErrorMessage name="password" component="p" className='text-[#ff0000]' />
-                        </div>
+                                </div>
 
-                        {/* 
+                                <Field name="password" type="password" placeholder="Contraceña *" className="w-full bg-[#e9f1fe] mt-3 p-4 rounded-md  focus:border-[#2286FF] " />
+                                <div className="min-h-[25px]">
+                                    {/* <ErrorMessage name="password" component="p" className='text-[#ff0000]' /> */}
+                                    {errors.password && touched.password && (<span className="text-[#ff0000]">{errors.password}</span>)}
+
+                                </div>
+
+                                {/* 
                         <a href="/SigingUp" className='block mt-10 mx-auto py-3 px-10 bg-white text-[#2286FF] hover:border-2 hover:border-[#2286FF] rounded-lg '>
                             Crear cuenta
                         </a> */}
 
-                        <button type="submit" className='block mt-10 mx-auto py-3 px-10 text-white bg-[#2286FF] hover:bg-[#24599a] rounded-lg '>Iniciar sesión</button>
-                    </Form>
-
+                                <button type="submit" className='block mt-10 mx-auto py-3 px-10 text-white bg-[#2286FF] hover:bg-[#24599a] rounded-lg '>Iniciar sesión</button>
+                            </Form>
+                        );
+                    }}
                 </Formik>
 
             </div>
