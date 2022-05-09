@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/yup": "^0.29.13",
     "firebase": "^9.6.10",
     "formik": "^2.2.9",
     "next": "12.1.2",
