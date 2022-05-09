@@ -1,5 +1,5 @@
 // import Login from "../components/Login";
-import SigingUp from "../components/SigingUp";
+import Login from "../components/Login";
 import Head from 'next/head'
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
@@ -83,7 +83,7 @@ export default function Account() {
                 <Header className=' justify-between mx-32 mb-10' />
             </div>
 
-            {user ? <Dashboard user={user} /> : <SigingUp />}
+            {user ? <Dashboard user={user} /> : <Login />}
             {/* <Login className="my-7" />
             <SigingUp /> */}
 
