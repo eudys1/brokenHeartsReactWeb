@@ -25,7 +25,7 @@ const getImageSize = (url: string) => {
 
 async function runGetImageSize(url: string) {
 
-    let img = await getImageSize(url);
+    const img = await getImageSize(url);
 
     // console.log("dddd: ", img);
     return img;
