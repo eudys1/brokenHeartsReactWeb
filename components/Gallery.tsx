@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useFirestorage } from "../hooks/useFirestorage";
-import ImageComponent from "./ImageComponent";
-import Image from "next/image";
 import UploadImage from "./UploadImage";
 
 
 //get with and height of image
 const getImageSize = (url: string) => {
     return new Promise((resolve, reject) => {
-        let img = new window.Image();
+        const img = new window.Image();
         let wi;
         let he;
         img.onload = () => {
@@ -46,7 +44,7 @@ export default function Gallery() {
 
     const handleUpload = (e: any) => {
         //no multiple files allowed
-        let fileSelected = e.target.files[0];
+        const fileSelected = e.target.files[0];
 
         if (fileSelected && typesPermited.includes(fileSelected.type)) {
             UploadImage(fileSelected);
@@ -65,7 +63,7 @@ export default function Gallery() {
             docs &&
                 docs.map(async(doc: any) => {
                     // console.log(doc);
-                    let x:any = await runGetImageSize(doc.url);
+                    const x:any = await runGetImageSize(doc.url);
                     console.log("x: ", x.width);
                     // setSize(size.push(x));
                     size.push(x);

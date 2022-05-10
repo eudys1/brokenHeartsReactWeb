@@ -1,6 +1,6 @@
 import {firebaseInit} from "../firebase";
 import { getAuth, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const auth = getAuth(firebaseInit);
 const firestore = getFirestore(firebaseInit);

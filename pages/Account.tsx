@@ -1,4 +1,3 @@
-// import Login from "../components/Login";
 import Login from "../components/Login";
 import Head from 'next/head'
 import Header from "../components/Header";
@@ -6,7 +5,7 @@ import { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import {firebaseInit} from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { User as FirebaseUser } from "firebase/auth";
 
 const auth = getAuth(firebaseInit);

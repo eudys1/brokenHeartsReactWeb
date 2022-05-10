@@ -1,4 +1,3 @@
-import { url } from 'inspector'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Image from "next/image";
