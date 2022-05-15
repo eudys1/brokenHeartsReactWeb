@@ -2,9 +2,10 @@ import { Formik, Field, Form, ErrorMessage, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
 import { firebaseInit } from '../firebase';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
+const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseInit);
 
 const FormValidation = Yup.object().shape({
@@ -58,6 +59,19 @@ export default function Login(className?: any) {
                 errorCode === 'auth/user-not-found' && setError('Usuario no encontrado');
             });
     }
+
+    //Login a user with google
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth,provider)
+            .then((result) => {
+                const user = result.user;
+                console.log("google: ",user);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+            
 
     async function handleOnSubmit(userData: FormikValues) {
         // e.preventDefault();
@@ -121,7 +135,7 @@ export default function Login(className?: any) {
                                     <button type='button' onClick={() => setIsRegister(!isRegister)} className={`block py-3 px-10 bg-white text-[#2286FF] border-2 border-transparent hover:border-[#2286FF] rounded-md `}> {!isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
                                     <button type="submit" className={` py-3 px-10  text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md `}>{isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
                                 </div>
-                                {isRegister && <button type='button' className='w-fit mx-auto mt-5 py-3 px-10 bg-slate-100 hover:bg-slate-200 rounded-md'>Iniciar sesión con Google</button>}
+                                {isRegister && <button onClick={handleGoogleLogin} type='button' className='w-fit mx-auto mt-5 py-3 px-10 bg-slate-100 hover:bg-slate-200 rounded-md'>Iniciar sesión con Google</button>}
                             </Form>
                         {/* );
                     }} */}

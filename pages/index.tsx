@@ -52,7 +52,7 @@ export default function Home() {
 				<SmallGalery />
 			</div>
 
-			<div className="max-w-[85%] mx-auto flex flex-col md:flex-row gap-8 md:gap-0 border-t-2 border-zinc-300 py-10 font-['Arial']">
+			<div className=" mx-auto flex flex-col md:flex-row gap-8 md:gap-0 border-t-2 border-zinc-300 py-10 font-['Arial']">
 
 
 				<div className="md:pt-16 flex flex-col  md:w-1/2 px-5 text-center md:text-right	gap-4 md:order-last ">
@@ -77,7 +77,7 @@ export default function Home() {
 
 
 
-			<div className='bg-black'>
+			<div className='bg-black px-5'>
 				<Footer className='text-center lg:text-left' />
 			</div>
 		</div >

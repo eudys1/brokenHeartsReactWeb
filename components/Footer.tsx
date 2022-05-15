@@ -10,7 +10,7 @@ export default function Footer({ className }: FooterrProps) {
 
 
     return (
-        <div className={`min-h-48 flex flex-col lg:flex-row  justify-between items-center mx-32 py-5 ${className}`}>
+        <div className={`min-h-48 flex flex-col md:flex-row  justify-between items-center gap-5 py-5 ${className}`}>
             <div className="flex flex-col">
                 <Link href="/"><a><Logo className="w-max"/></a></Link>
                 <SocialMedias />
