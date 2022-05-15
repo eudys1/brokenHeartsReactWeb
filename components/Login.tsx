@@ -72,7 +72,7 @@ export default function Login(className?: any) {
             });
     }
             
-
+//FIXME: google auth when is a new user 
     async function handleOnSubmit(userData: FormikValues) {
         // e.preventDefault();
         const nombre = userData.nombre;
