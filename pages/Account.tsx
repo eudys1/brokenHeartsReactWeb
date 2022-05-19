@@ -17,6 +17,7 @@ export default function Account() {
 
     const [user, setUser] = useState<FirebaseUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    
     //
     async function getFirestoreUserData(uid: any) {
         const docRef = doc(firestore, `usuarios/${uid}`);
