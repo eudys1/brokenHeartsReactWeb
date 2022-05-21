@@ -13,6 +13,8 @@ interface saveUserInFirestorageProps {
     email?: React.ReactNode;
     rol?: React.ReactNode;
 }
+
+
 const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseInit);
 
@@ -33,11 +35,10 @@ export default function Login(className?: any) {
     const [error, setError] = useState('');
 
     function saveUserInFirestorage({userUid="",nombre="",apellidos="",email="",rol="client"}: saveUserInFirestorageProps) {
-        // const user = userCredential.user;
+        
+        //save user in firestore:
         const docRef = doc(firestore, `usuarios/${userUid}`);
         setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol });
-
-        // return user;
     }
 
 

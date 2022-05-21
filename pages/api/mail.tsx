@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
