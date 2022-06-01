@@ -74,8 +74,7 @@ export default function Account() {
                 </div>
 
                 {user ? <Dashboard user={user} /> : <Login />}
-                {/* <Login className="my-7" />
-            <SigingUp /> */}
+                
 
             </>
     )

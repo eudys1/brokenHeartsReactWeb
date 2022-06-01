@@ -104,7 +104,9 @@ export default function Gallery() {
                     docs.map((doc: any, index) => {
                         // console.log("size", size);
                         
+                        {size && console.log("size: ", size[index])}
                         return (
+
 
                             <div key={doc.id} className="  ">
                                 {/* <Image key={doc.id}src={doc.url} alt={doc.name}  objectFit="contain" className="" /> */}

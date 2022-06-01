@@ -21,13 +21,7 @@ export default function Shop() {
             <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
                 tienda
             </div>
-
-            <div className="snap-x mx-auto snap-mandatory h-52 flex w-[450px] overflow-scroll gap-5">
-				<div className="snap-start bg-amber-200 w-52 flex-shrink-0 h-52 flex items-center justify-center text-8xl">1</div>
-				<div className="snap-start bg-teal-200 w-52 flex-shrink-0  h-52 flex items-center justify-center text-8xl">2</div>
-				<div className="snap-start bg-cyan-200 w-52 flex-shrink-0 h-52 flex items-center justify-center text-8xl">3</div>
-				<div className="snap-start bg-fuchsia-200 w-52 flex-shrink-0 h-52 flex items-center justify-center text-8xl">4</div>
-			</div>
+            
         </>
     )
 }
