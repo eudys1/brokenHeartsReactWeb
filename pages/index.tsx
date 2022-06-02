@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import Image from "next/image";
 import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
-import Contact from './Contact';
+import Contact from '../components/Contact';
 
 
 
@@ -51,8 +51,7 @@ export default function Home() {
 				<SmallGalery />
 			</div>
 
-			<div className=" mx-auto flex flex-col md:flex-row gap-8 md:gap-0 border-t-2 border-zinc-300 py-10 font-['Arial']">
-
+			<div className=" mx-auto flex flex-col md:flex-row gap-8 md:gap-0 border-t-2 border-zinc-300 py-10 max-w-[90%] font-['Arial']">
 
 				<div className="md:pt-16 flex flex-col  md:w-1/2 px-5 text-center md:text-right	gap-4 md:order-last ">
 					<h3 className='text-2xl text-[#f56c95]'>¿Tienes dudas?</h3>
