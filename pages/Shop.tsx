@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import Header from "../components/Header";
+import { useUserAuth } from '../context/authContext';
 
 export default function Shop() {
+    const {user}:any = useUserAuth();
 
+    // if (user.rol != null){
 
+        console.log(user);
+    // }
+    
     return (
         <>
             <Head>
@@ -20,6 +26,7 @@ export default function Shop() {
             <h1 className="text-4xl text-center my-10">Tienda</h1>
             <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
                 tienda
+                {/* {user.rol === "admin" && <p>Bienvenido {user.nombre}</p>} */}
             </div>
             
         </>

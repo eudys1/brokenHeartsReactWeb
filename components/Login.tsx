@@ -2,20 +2,10 @@ import { Formik, Field, Form, ErrorMessage, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
 import { firebaseInit } from '../firebase';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getAuth} from 'firebase/auth';
+import { useUserAuth } from '../context/authContext';
 
 
-interface saveUserInFirestorageProps {
-    userUid: React.ReactNode;
-    nombre?: React.ReactNode;
-    apellidos?: React.ReactNode;
-    email?: React.ReactNode;
-    rol?: React.ReactNode;
-}
-
-
-const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseInit);
 
 const FormValidation = Yup.object().shape({
@@ -26,94 +16,12 @@ const FormValidation = Yup.object().shape({
 
 });
 
-//TODO: improve  function saveUserInFirestorage
+
 
 export default function Login(className?: any) {
 
-    const firestore = getFirestore(firebaseInit);
     const [isRegister, setIsRegister] = useState(true);
-    const [error, setError] = useState('');
-
-    function saveUserInFirestorage({userUid="",nombre="",apellidos="",email="",rol="client"}: saveUserInFirestorageProps) {
-        
-        //save user in firestore:
-        const docRef = doc(firestore, `usuarios/${userUid}`);
-        setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol });
-    }
-
-
-    //create a new user
-    async function userRegister(nombre: string, apellidos: string, email: string, password: string, rol = "client") {
-
-        const userInfo = await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-
-                //TODO:use function saveUserInFirestorage here
-                const user = userCredential.user;
-
-                const docRef = doc(firestore, `usuarios/${userInfo.uid}`);
-                setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol });
-
-                return user;
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                errorCode === 'auth/weak-password' && setError('La contraseña es muy débil (mínimo 6 carácteres');
-                return errorCode; //?
-            });
-
-    }
-
-    //Login a user
-    async function signIn(auth: any, email: string, password: string) {
-
-        await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                errorCode === 'auth/wrong-password' && setError('Contraseña incorrecta');
-                errorCode === 'auth/user-not-found' && setError('Usuario no encontrado');
-            });
-    }
-
-    //FIXME: google auth when is a new user 
-    //Login a user with google
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                if (!credential) return;
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-
-                console.log(user);
-
-                saveUserInFirestorage({ userUid:user.uid, nombre:user.displayName, email:user.email, rol:"client" });
-                
-
-            })
-            .catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                console.log(errorCode);
-
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                // The email of the user's account used.
-                const email = error.email;
-                console.log(email);
-
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-            });
-    }
+    const {signUp, logIn, handleGoogleLogin, error, user}:any = useUserAuth();
 
 
     async function handleOnSubmit(userData: FormikValues) {
@@ -123,12 +31,14 @@ export default function Login(className?: any) {
         const email = userData.email;
         const password = userData.password;
 
+        
+        !isRegister ? await signUp(nombre, apellidos, email, password) : await logIn(auth, email, password);
+        
         console.log("No api", userData);
-
-        !isRegister ? userRegister(nombre, apellidos, email, password) : signIn(auth, email, password);
-
     }
+    
 
+    
     return (
         <>
 

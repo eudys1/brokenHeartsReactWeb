@@ -1,63 +1,14 @@
 import Login from "../components/Login";
 import Head from 'next/head'
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
-import { firebaseInit } from "../firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { User as FirebaseUser } from "firebase/auth";
-
-const auth = getAuth(firebaseInit);
-const firestore = getFirestore(firebaseInit);
+import { useUserAuth } from "../context/authContext";
 
 
 
 export default function Account() {
 
-    const [user, setUser] = useState<FirebaseUser | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    
-    //
-    async function getFirestoreUserData(uid: any) {
-        const docRef = doc(firestore, `usuarios/${uid}`);
-        const docCifrada = await getDoc(docRef);
-        const userInfo = docCifrada.data();
-
-        return userInfo;
-    }
-
-    // 
-    async function setFirebaseUserWithNecesaryData(firebaseUser: any) {
-
-        //
-        const userInfo = await getFirestoreUserData(firebaseUser.uid);
-
-        if (!userInfo) return;
-
-        const userData: any = {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            nombre: userInfo.nombre,
-            apellidos: userInfo.apellidos,
-            rol: userInfo.rol,
-        };
-
-        setUser(userData);
-
-
-    }
-
-    //to control the login of the users
-    useEffect(() => {
-        onAuthStateChanged(auth, async (firebaseUser: any) => {
-            (!user && firebaseUser) && await setFirebaseUserWithNecesaryData(firebaseUser);
-            !firebaseUser && setUser(null);
-            setIsLoading(false);
-        });
-
-    }, []);
-
+    const {isLoading, user}:any = useUserAuth();
 
 
     return (
@@ -73,7 +24,7 @@ export default function Account() {
                     <Header className=' justify-between mx-32 mb-10' />
                 </div>
 
-                {user ? <Dashboard user={user} /> : <Login />}
+                {user ? <Dashboard /> : <Login />}
                 
 
             </>
