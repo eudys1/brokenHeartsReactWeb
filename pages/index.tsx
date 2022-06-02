@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import Image from "next/image";
 import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
-import Footer from '../components/Footer';
 import Contact from './Contact';
 
 
@@ -77,9 +76,9 @@ export default function Home() {
 
 
 
-			<div className='bg-black px-5'>
+			{/* <div className='bg-black px-5'>
 				<Footer className='text-center lg:text-left' />
-			</div>
+			</div> */}
 		</div >
 	)
 }

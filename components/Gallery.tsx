@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useUserAuth } from "../context/authContext";
 import { useFirestorage } from "../hooks/useFirestorage";
 import UploadImage from "./UploadImage";
 
@@ -33,7 +34,7 @@ async function runGetImageSize(url: string) {
 }
 
 export default function Gallery() {
-
+    const { user }: any = useUserAuth();
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
     const [docs] = useFirestorage('galleryImages');
@@ -58,42 +59,40 @@ export default function Gallery() {
     }
 
     useEffect(() => {
-        
+
         {
             docs &&
-                docs.map(async(doc: any) => {
+                docs.map(async (doc: any) => {
                     // console.log(doc);
-                    const x:any = await runGetImageSize(doc.url);
+                    const x: any = await runGetImageSize(doc.url);
                     console.log("x: ", x.width);
                     // setSize(size.push(x));
                     size.push(x);
-                    
+
                 });
         }
 
         console.log("aaaaa", size);
         console.log("aaaaa", size[2]);
 
-    },[docs]);
+    }, [docs]);
 
     // console.log("size: ", size);
-    
+
     return (
         <>
-            <form action="" className="w-fit mx-auto">
+            {user && user.rol=="admin"&&
+
+            <form action="" className="w-fit mx-auto my-5">
                 <label>
                     <input type="file" onChange={handleUpload} className="hidden" />
                     <span className="block w-16 h-16 text-5xl text-center text-[#2286FF] border-[#2286FF] rounded-full border-2  cursor-pointer hover:border-[#24599a] hover:text-[#24599a]">+</span>
                 </label>
             </form>
+            }
 
-            {/* {
-                file &&
-                console.log("file: ", file)
-            } */}
 
             {error && <p className="text-red-500 text-center">{error}</p>}
-            {/* {file && <ProgressBar file={file} setFile={setFile} />} */}
 
             {console.log("ssss", docs)}
 
@@ -103,10 +102,9 @@ export default function Gallery() {
                     docs &&
                     docs.map((doc: any, index) => {
                         // console.log("size", size);
-                        
-                        {size && console.log("size: ", size[index])}
-                        return (
 
+                        { size && console.log("size: ", size[index]) }
+                        return (
 
                             <div key={doc.id} className="  ">
                                 {/* <Image key={doc.id}src={doc.url} alt={doc.name}  objectFit="contain" className="" /> */}
@@ -118,21 +116,6 @@ export default function Gallery() {
                 }
 
 
-
-
-                {/* <ImageComponent className="" src={"/marta.jpg"} width={450} height={300} alt={"marta"} scale={true} />
-                <ImageComponent className="" src={"/marta.jpg"} width={250} height={350} alt={"marta"} scale={true} />
-                <ImageComponent className="" src={"/jaime.jpg"} width={100} height={450} alt={"jaime"} scale={true} />
-                <ImageComponent className="" src={"/marta.jpg"} width={200} height={350} alt={"marta"} scale={true} />
-                <ImageComponent className="" src={"/3personas-skate.jpg"} width={250} height={450} alt={"3 personas en skate"} scale={true} />
-                <ImageComponent className="" src={"/jaime.jpg"} width={350} height={200} alt={"jaime"} scale={true} />
-                <ImageComponent className="" src={"/jaime.jpg"} width={300} height={500} alt={"jaime"} scale={true} />
-                <ImageComponent className="" src={"/3personas-skate.jpg"} width={250} height={300} alt={"3 personas en skate"} scale={true} />
-                <ImageComponent className="" src={"/jaime.jpg"} width={250} height={350} alt={"jaime"} scale={true} />
-                <ImageComponent className="" src={"/3personas-skate.jpg"} width={250} height={450} alt={"3 personas en skate"} scale={true} />
-                <ImageComponent className="" src={"/marta.jpg"} width={250} height={300} alt={"marta"} scale={true} />
-                <ImageComponent className="" src={"/3personas-skate.jpg"} width={450} height={500} alt={"3 personas en skate"} scale={true} />
-                <ImageComponent className="" src={"/jaime.jpg"} width={300} height={450} alt={"jaime"} scale={true} /> */}
             </div>
         </>
     )

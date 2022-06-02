@@ -8,7 +8,7 @@ import { useUserAuth } from "../context/authContext";
 
 export default function Account() {
 
-    const {isLoading, user}:any = useUserAuth();
+    const { isLoading, user }: any = useUserAuth();
 
 
     return (
@@ -20,12 +20,12 @@ export default function Account() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
 
-                <div className="bg-black">
-                    <Header className=' justify-between mx-32 mb-10' />
+                <div className="bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg sticky top-0 h-[68px] w-full">
+                    <Header className=' justify-between mx-32 ' />
                 </div>
 
                 {user ? <Dashboard /> : <Login />}
-                
+
 
             </>
     )
