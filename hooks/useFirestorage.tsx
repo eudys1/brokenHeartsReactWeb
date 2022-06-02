@@ -1,5 +1,5 @@
-import { getFirestore, collection, onSnapshot, query } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { getFirestore, collection, onSnapshot, query } from "firebase/firestore";
 import { firebaseInit } from "../firebase";
 
 //TODO: use try and catch
