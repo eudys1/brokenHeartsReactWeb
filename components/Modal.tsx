@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react'
 
 
 interface MoralProps {
+    elementShownWhenModalIsClose?:React.ReactNode;
     modalTitle?: string;
     modalDescription?: React.ReactNode;
     openModalButtonTitle?: string;
@@ -17,7 +18,7 @@ interface MoralProps {
 
 }
 
-export default function Modal({ cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, className = "", style = {} }: MoralProps) {
+export default function Modal({elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, className = "", style = {} }: MoralProps) {
 
     let [isOpen, setIsOpen] = useState(false)
 
@@ -31,14 +32,8 @@ export default function Modal({ cerrarModal = true, modalTitle, modalDescription
 
     return (
         <>
-            <div className="">
-                <button
-                    type="button"
-                    onClick={openModal}
-                    className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-                >
-                    {openModalButtonTitle}
-                </button>
+            <div onClick={openModal} className="">
+                {elementShownWhenModalIsClose}
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -66,7 +61,7 @@ export default function Modal({ cerrarModal = true, modalTitle, modalDescription
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-fit transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     {/* {modalTitle && */}
                                     <Dialog.Title
                                         as="h3"

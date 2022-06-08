@@ -14,8 +14,7 @@ export default function UploadImage(file: any) {
 
     const firestore = getFirestore(firebaseInit);
     const storageRef = ref(storage, file.name);
-    console.log("me he ejecutado hook");
-
+    
     try {
         uploadBytes(storageRef, file).then(
             async () => {

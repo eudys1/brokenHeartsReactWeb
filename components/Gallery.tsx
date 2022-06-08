@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUserAuth } from "../context/authContext";
 import { useFirestorage } from "../hooks/useFirestorage";
-import UploadImage from "./UploadImage";
+import UploadImage from "../functions/UploadImage";
 
 
 //get with and height of image

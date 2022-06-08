@@ -3,24 +3,35 @@ import { useState } from "react";
 import * as Yup from 'yup';
 import InputFile from "./InputFile";
 
+interface NewProductFormProps {
+    className?: string;
+    setProductData?: (data: any) => void;
+
+}
+
 const FormValidation = Yup.object().shape({
-    nombre: Yup.string().required("Introduce un nombre"),
-    precio: Yup.number().required("Define un precio al producto"),
-    images: Yup.array(),
+        nombre: Yup.string().required("Introduce un nombre"),
+        precio: Yup.number().required("Define un precio al producto"),
+        images: Yup.array(),
 
-});
+    });
 
-export default function NewProductForm() {
+
+
+export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<FileList | null>(null);
 
 
     async function handleOnSubmit(e: FormikValues) {
-        const allContactData = e;
+        const formData = e;
 
-        allContactData.files= files;
-        
-        
-        console.log("product form values: ", allContactData);
+        formData.files = files;
+
+
+        console.log("product form values: ", formData);
+
+        //Optional chaining (?.)
+        setProductData?.(formData);
 
     }
 
@@ -77,7 +88,7 @@ export default function NewProductForm() {
 
                     </div>
 
-                    <InputFile onFileSelected={(files:any) => setFiles(files)} />
+                    <InputFile onFileSelected={(files: any) => setFiles(files)} />
 
                     <div className=" grid mt-10">
                         <button type="submit" className='justify-self-end inline-flex self-end rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'>Crear producto</button>

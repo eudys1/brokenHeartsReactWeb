@@ -7,23 +7,14 @@ import Router from 'next/router';
 import Modal from '../components/Modal';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import NewProductForm from '../components/NewProductForm';
+import Product from '../components/Product';
+import Image from 'next/image';
 
 export default function Shop() {
     const { user }: any = useUserAuth();
-    // const [products, setProducts] = useState<Array<any>>([]);
+    const [productData, setProductData] = useState<any>(null);
 
-    // const getProducts = async () => {
-
-    //     const response = await fetch('/api/ProductListStripe');
-    //     const products = await response.json();
-    //     setProducts(products);
-
-    // }
-
-    // // getProducts();
-    // useEffect(() => {
-    //     getProducts();
-    // }, []);
+    console.log("productData: ", productData);
 
 
     async function checkout() {
@@ -31,9 +22,12 @@ export default function Shop() {
             quantity: 1,
             price_data: {
                 currency: 'eur',
-                unit_amount: (20) * 100,
+                unit_amount: (productData.precio) * 100,
                 product_data: {
-                    name: 'T-shirt',
+                    name: productData.nombre,
+                    description: productData.descripcion,
+                    // images: [productData.url],
+
 
                 },
 
@@ -65,8 +59,8 @@ export default function Shop() {
             </div>
 
             <h1 className="text-4xl text-center my-10">Tienda</h1>
-            <div className="w-[600px] h-[700px] m-auto bg-slate-400 rounded p-7">
-                tienda
+            <div className="w-[600px] h-[700px] m-auto  rounded p-7">
+
                 {
                     // products.map((item: any) => {
                     //     return (
@@ -78,16 +72,47 @@ export default function Shop() {
                     //     )
                     // })
                 }
+
                 {/* <button onClick={()=>location.reload()}>cerrar</button> */}
+
+                {/* CREAR NUEVO PRODUCTO: */}
                 <Modal
+                    elementShownWhenModalIsClose={
+                        <button className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                            Crear producto
+                        </button>
+                    }
                     openModalButtonTitle='Crear producto'
                     modalTitle='Crea un nuevo producto'
-                    // cancelButtonTitle='Cancelar'
-                    // successButtonTitle='Crear producto'
-                    modalDescription={<NewProductForm/>}/>
-                
+                    cerrarModal={false}
+                    modalDescription={<NewProductForm setProductData={setProductData} />}
+                />
 
-                <button onClick={checkout}>CHECKOUT</button>
+                {/* PRODUCTOS: */}
+                <Modal
+                    elementShownWhenModalIsClose={
+                        <Product className='w-72 h-96 flex flex-col text-center hover:cursor-pointer' category="Ropa" imageUrl="/unisex-staple-t-shirt-navy-front-621f52a8d5672.png" name='Camiseta' price={9.99} />
+                    }
+                    modalDescription={
+                        <div className='flex'>
+                            <div className='relative h-[inherit] w-full'>
+                                <Image src={'/unisex-staple-t-shirt-navy-front-621f52a8d5672.png'} layout="fill" objectFit='contain' />
+                            </div>
+                            <div className='flex flex-col'>
+                                <span>Camiseta</span>
+                                <strong>9.99 €</strong>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos dolorem in enim recusandae iusto, vero vel suscipit aperiam obcaecati iste, tenetur nemo reprehenderit? Minima fuga pariatur perferendis a, provident facilis!</p>
+                                <div>
+                                    <input className='border-2 rounded' type="number" name="" id="" />
+                                    <button className=" w-fit mx-auto px-5 py-3  bg-slate-400 rounded text-white">Añadir al carrito</button>
+                                </div>
+                                <hr />
+                                <span>Ropa</span>
+                            </div>
+                        </div>
+                    }
+                />
+                <button onClick={checkout}>Comprar</button>
 
             </div>
 
