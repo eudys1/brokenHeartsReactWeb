@@ -1,36 +1,85 @@
+import { arrayUnion, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import { useState } from "react";
 import * as Yup from 'yup';
+import { firebaseInit, storage } from "../firebase";
 import InputFile from "./InputFile";
 
 interface NewProductFormProps {
     className?: string;
     setProductData?: (data: any) => void;
-
 }
 
-const FormValidation = Yup.object().shape({
-        nombre: Yup.string().required("Introduce un nombre"),
-        precio: Yup.number().required("Define un precio al producto"),
-        images: Yup.array(),
+const firestore = getFirestore(firebaseInit);
 
-    });
+const FormValidation = Yup.object().shape({
+    nombre: Yup.string().required("Introduce un nombre"),
+    precio: Yup.number().required("Define un precio al producto"),
+    images: Yup.array(),
+
+});
 
 
 
 export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
-    const [files, setFiles] = useState<FileList | null>(null);
-
-
+    const [files, setFiles] = useState<any[]>([]);
+   
     async function handleOnSubmit(e: FormikValues) {
         const formData = e;
-
+        const urlImages: any[] = [];
+        
         formData.files = files;
+        formData.images = urlImages;
 
 
-        console.log("product form values: ", formData);
+        const docRef = doc(collection(firestore, "products"));
+        setDoc(docRef, {
+            name: formData.nombre,
+            price: formData.precio,
+            images: formData.images,
+            description: formData.descripcion,
+            category: formData.categoria,
+            colors: formData.colores,
+            sizes: formData.tallas,
+        });
 
-        //Optional chaining (?.)
+
+        //convert FileList to a normal Array
+        const arrayFiles = Array.from(formData.files);
+
+        arrayFiles.forEach((file: any) => {
+            const storageRef = ref(storage, `productImages/${file.name}`);
+
+            try {
+                //upload image to storage
+                uploadBytes(storageRef, file).then(
+                    async () => {
+                        await getDownloadURL(storageRef).then((url: any) => {
+                            formData.images.push(url);
+
+                            //update array of images of product to add the url
+                            updateDoc(docRef, {
+                                images: arrayUnion(url)
+                            });
+
+                        });
+                    }
+                );
+
+            } catch (error) {
+                console.log(error);
+            }
+        });
+
+        console.log("urlImages: ", urlImages);
+        console.log("formData.images: ", formData.images);
+
+        
+
+
+        //sending data to father component
+        //optional chaining (?.) 
         setProductData?.(formData);
 
     }

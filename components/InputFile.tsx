@@ -15,9 +15,7 @@ export default function InputFile({ className = "", multiple = false, onFileSele
     // const [error, setError] = useState('');
 
     function handleInput(e: any) {
-        console.log("e: ", e.target.files);
         const files = e.target.files;
-
         // if (files && typesPermited.includes(files.type)) {
             onFileSelected(files)
         // }else{

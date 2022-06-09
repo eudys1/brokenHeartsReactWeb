@@ -112,6 +112,8 @@ export default function Shop() {
                         </div>
                     }
                 />
+
+                
                 <button onClick={checkout}>Comprar</button>
 
             </div>

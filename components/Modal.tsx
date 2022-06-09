@@ -20,7 +20,7 @@ interface MoralProps {
 
 export default function Modal({elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, className = "", style = {} }: MoralProps) {
 
-    let [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
         setIsOpen(false)

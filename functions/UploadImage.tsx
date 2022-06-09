@@ -13,8 +13,8 @@ export default function UploadImage(file: any) {
     // const [progress, setProgress] = useState(0);
 
     const firestore = getFirestore(firebaseInit);
-    const storageRef = ref(storage, file.name);
-    
+    const storageRef = ref(storage, `galleryImages/${file.name}`);
+
     try {
         uploadBytes(storageRef, file).then(
             async () => {
