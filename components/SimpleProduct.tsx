@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 
-interface ProductProps {
+interface SimpleProductProps {
     id?: string;
     name?: string;
     price?: number;
@@ -12,10 +12,10 @@ interface ProductProps {
 }
 
 
-export default function Product({ id, name, price, imageUrl = "", category, className = "" , onClick}: ProductProps) {
+export default function SimpleProduct({ id, name, price, imageUrl = "", category, className = "" , onClick}: SimpleProductProps) {
 
     return (
-        <div className="w-fit">
+        <div className="w-fit mx-auto">
             <div onClick={onClick} className={` ${className}`}>
                 <div className="relative h-full">
                     <Image src={imageUrl} layout="fill" objectFit="contain" />

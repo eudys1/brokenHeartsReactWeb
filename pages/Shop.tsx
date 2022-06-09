@@ -7,8 +7,10 @@ import Router from 'next/router';
 import Modal from '../components/Modal';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import NewProductForm from '../components/NewProductForm';
-import Product from '../components/Product';
+import Product from '../components/SimpleProduct';
 import Image from 'next/image';
+import ProductWithModal from '../components/ProductWithModal';
+import { useFirestorage } from '../hooks/useFirestorage';
 
 export default function Shop() {
     const { user }: any = useUserAuth();
@@ -45,6 +47,8 @@ export default function Shop() {
         Router.push(data.session.url);
     }
 
+    const [docs] = useFirestorage("products");
+
     return (
         <>
             <Head>
@@ -59,62 +63,37 @@ export default function Shop() {
             </div>
 
             <h1 className="text-4xl text-center my-10">Tienda</h1>
-            <div className="w-[600px] h-[700px] m-auto  rounded p-7">
 
-                {
-                    // products.map((item: any) => {
-                    //     return (
-                    //         <div className="flex flex-col items-center">
-                    //             <img src={item.image} alt="" className="w-full h-64" />
-                    //             <p className="text-center text-2xl">{item.name}</p>
-                    //             <p className="text-center text-2xl">{item.price}</p>
-                    //         </div>
-                    //     )
-                    // })
+            {/* CREAR NUEVO PRODUCTO: */}
+            <Modal
+                elementShownWhenModalIsClose={
+                    <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                        Crear producto
+                    </button>
                 }
+                openModalButtonTitle='Crear producto'
+                modalTitle='Crea un nuevo producto'
+                cerrarModal={false}
+                modalDescription={<NewProductForm setProductData={setProductData} />}
+            />
 
-                {/* <button onClick={()=>location.reload()}>cerrar</button> */}
+            <div className=" w-[80%] mx-auto p-5">
 
-                {/* CREAR NUEVO PRODUCTO: */}
-                <Modal
-                    elementShownWhenModalIsClose={
-                        <button className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                            Crear producto
-                        </button>
-                    }
-                    openModalButtonTitle='Crear producto'
-                    modalTitle='Crea un nuevo producto'
-                    cerrarModal={false}
-                    modalDescription={<NewProductForm setProductData={setProductData} />}
-                />
+
 
                 {/* PRODUCTOS: */}
-                <Modal
-                    elementShownWhenModalIsClose={
-                        <Product className='w-72 h-96 flex flex-col text-center hover:cursor-pointer' category="Ropa" imageUrl="/unisex-staple-t-shirt-navy-front-621f52a8d5672.png" name='Camiseta' price={9.99} />
-                    }
-                    modalDescription={
-                        <div className='flex'>
-                            <div className='relative h-[inherit] w-full'>
-                                <Image src={'/unisex-staple-t-shirt-navy-front-621f52a8d5672.png'} layout="fill" objectFit='contain' />
-                            </div>
-                            <div className='flex flex-col'>
-                                <span>Camiseta</span>
-                                <strong>9.99 €</strong>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos dolorem in enim recusandae iusto, vero vel suscipit aperiam obcaecati iste, tenetur nemo reprehenderit? Minima fuga pariatur perferendis a, provident facilis!</p>
-                                <div>
-                                    <input className='border-2 rounded' type="number" name="" id="" />
-                                    <button className=" w-fit mx-auto px-5 py-3  bg-slate-400 rounded text-white">Añadir al carrito</button>
-                                </div>
-                                <hr />
-                                <span>Ropa</span>
-                            </div>
-                        </div>
-                    }
-                />
+                <div className="grid grid-cols-1 md:grid-cols-3">
 
-                
-                <button onClick={checkout}>Comprar</button>
+                    {docs.map((item: any, index: number) => {
+                        return (
+                            <ProductWithModal key={index} productData={item} />
+                        )
+                    })
+                    }
+                </div>
+
+
+                {/* <button onClick={checkout}>Comprar</button> */}
 
             </div>
 

@@ -24,11 +24,11 @@ const FormValidation = Yup.object().shape({
 
 export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<any[]>([]);
-   
+
     async function handleOnSubmit(e: FormikValues) {
         const formData = e;
         const urlImages: any[] = [];
-        
+
         formData.files = files;
         formData.images = urlImages;
 
@@ -75,7 +75,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
         console.log("urlImages: ", urlImages);
         console.log("formData.images: ", formData.images);
 
-        
+
 
 
         //sending data to father component
@@ -109,10 +109,10 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
 
                     <div className="mt-3">
                         <span>Elige una categoria: </span>
-                        <Field as="select" name="categoria">
+                        <select name="categoria" defaultValue={1}>
                             <option value="ropa" >Ropa</option>
                             <option value="otros">Otros Productos</option>
-                        </Field>
+                        </select>
                     </div>
 
                     <div className="my-3">
@@ -133,7 +133,8 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                         <label><Field type="checkbox" name="colores" value="negro" />Negro</label>
                         <label><Field type="checkbox" name="colores" value="azul" />Azul</label>
                         <label><Field type="checkbox" name="colores" value="blanco" />Blanco</label>
-                        <label><Field type="checkbox" name="colores" value="Rosa" />Rosa</label>
+                        <label><Field type="checkbox" name="colores" value="rojo" />Rojo</label>
+                        <label><Field type="checkbox" name="colores" value="rosa" />Rosa</label>
 
                     </div>
 
