@@ -106,7 +106,7 @@ export default function Gallery() {
                         return (
 
 
-                            <Modal
+                            <Modal key={index}
                                 elementShownWhenModalIsClose={
                                     <div className=" mb-5 hover:cursor-pointer shadow-xl">
                                         {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}

@@ -4,7 +4,7 @@ import { slide as Menu } from 'react-burger-menu'
 import { HiMenu } from "react-icons/hi";
 import Logo from './Logo';
 
-export default function MobileNavbar({ }) {
+export default function MobileNavbar() {
     const [toggle, setToggle] = useState(false)
 
     const toggleHandler = () => {

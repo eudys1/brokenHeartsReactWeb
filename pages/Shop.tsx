@@ -16,7 +16,7 @@ export default function Shop() {
 
     function addToShopingCart(product: any) {
 
-        let shopingCartProduct: any = {};
+        const shopingCartProduct: any = {};
         shopingCartProduct.quantity = 1;
         shopingCartProduct.product = product;
         shopingCartProduct.productId = product.id;
