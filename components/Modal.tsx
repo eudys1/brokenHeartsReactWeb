@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react'
 
 
 interface MoralProps {
-    elementShownWhenModalIsClose?:React.ReactNode;
+    elementShownWhenModalIsClose?: React.ReactNode;
     modalTitle?: string;
     modalDescription?: React.ReactNode;
     openModalButtonTitle?: string;
@@ -11,14 +11,18 @@ interface MoralProps {
     buttonOnClickCancel?: () => void;
     successButtonTitle?: string;
     buttonOnClickSuccess?: () => void;
-    className?: string;
+    classNameWhenModalClose?: string;
+    classNameWhenModalOpen?: string;
+    classNameOfBackground?: string;
+    DescriptionClassNameWhenModalOpen?: string;
     style?: React.CSSProperties;
+    showCrossCloseModal?: boolean;
 
     cerrarModal?: boolean;
 
 }
 
-export default function Modal({elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, className = "", style = {} }: MoralProps) {
+export default function Modal({ showCrossCloseModal = true, elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, classNameWhenModalOpen = "", classNameOfBackground = "", classNameWhenModalClose = "", DescriptionClassNameWhenModalOpen = "", style = {} }: MoralProps) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -32,7 +36,7 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
 
     return (
         <>
-            <div onClick={openModal} className="relative ">
+            <div onClick={openModal} className={`relative ${classNameWhenModalClose}`} >
                 {elementShownWhenModalIsClose}
             </div>
 
@@ -47,7 +51,7 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black bg-opacity-40" />
+                        <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm ${classNameOfBackground} `} />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
@@ -61,20 +65,22 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className=" transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className={` transform overflow-hidden  transition-all ${classNameWhenModalOpen}`}>
                                     {/* {modalTitle && */}
                                     <Dialog.Title
                                         as="h3"
                                         className=" mb-5 text-lg font-medium leading-6 text-gray-900 grid grid-flow-col "
                                     >
                                         {modalTitle}
+                                        
 
-                                        <div className='justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>X</div>
+                                            <div className='justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>{showCrossCloseModal &&"X"}</div>
+                                        
                                     </Dialog.Title>
                                     {/* } */}
 
                                     {modalDescription &&
-                                        <div className="mb-5">
+                                        <div className={` ${DescriptionClassNameWhenModalOpen}`}>
                                             {modalDescription}
                                         </div>
                                     }

@@ -3,6 +3,7 @@ import { useUserAuth } from "../context/authContext";
 import { useFirestorage } from "../hooks/useFirestorage";
 import UploadImage from "../functions/UploadImage";
 import Modal from "./Modal";
+import Image from "next/image";
 
 //get with and height of image
 const getImageSize = (url: string) => {
@@ -107,15 +108,20 @@ export default function Gallery() {
 
 
                             <Modal key={index}
+                                showCrossCloseModal={false}
                                 elementShownWhenModalIsClose={
-                                    <div className=" mb-5 hover:cursor-pointer shadow-xl">
+                                    <div className=" mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
                                         {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
                                         {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
-                                        <img src={doc.url} alt=""/>
+                                        <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt="" />
                                     </div>
                                 }
                                 modalDescription={
-                                    <img src={doc.url} alt=""/>
+                                    <div className="w-[350px] lg:w-[900px] h-[550px]">
+                                        {/* <img className="w-fit h-fit" src={doc.url} alt="" /> */}
+                                        <Image src={doc.url} layout="fill" objectFit="contain" />
+
+                                    </div>
                                 }
                             />
 

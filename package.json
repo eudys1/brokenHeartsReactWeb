@@ -21,6 +21,9 @@
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
+    "react-responsive-carousel": "^3.2.23",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "stripe": "^9.6.0",
     "usehooks-ts": "^2.5.4",
     "yup": "^0.32.11"
@@ -31,6 +34,7 @@
     "@types/react": "^18.0.9",
     "@types/react-burger-menu": "^2.8.3",
     "@types/react-dom": "^18.0.3",
+    "@types/react-slick": "^0.23.8",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "autoprefixer": "^10.4.4",

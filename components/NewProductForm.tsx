@@ -23,7 +23,7 @@ const FormValidation = Yup.object().shape({
 
 export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<any[]>([]);
-    const [currentCategory, setcurrentCategory] = useState('ropa')
+    const [currentCategory, setcurrentCategory] = useState('ropa');
 
     const changeCategory = (newCategory: string) => {
         setcurrentCategory(newCategory)
@@ -82,6 +82,8 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
         //sending data to father component
         //optional chaining (?.) 
         setProductData?.(formData);
+        
+        // location.reload();
 
     }
 
@@ -142,7 +144,9 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                     <InputFile onFileSelected={(files: any) => setFiles(files)} />
 
                     <div className=" grid mt-10">
-                        <button type="submit" className='justify-self-end inline-flex self-end rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'>Crear producto</button>
+                        <button type="submit" className='justify-self-end inline-flex self-end rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'>
+                            
+                            Crear producto</button>
                     </div>
                 </Form>
 

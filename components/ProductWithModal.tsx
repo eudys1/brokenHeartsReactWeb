@@ -12,7 +12,7 @@ export default function ProductWithModal({ productData, className = "", onClickB
 
     return (
         <Modal
-            className={``}
+            classNameWhenModalOpen="rounded-2xl bg-white p-6 text-left align-middle shadow-xl"
             elementShownWhenModalIsClose={
                 <SimpleProduct
                     onClickButton={onClickButton}

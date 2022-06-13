@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {  useState } from 'react';
+import { useState } from 'react';
 import Header from "../components/Header";
 import Modal from '../components/Modal';
 import NewProductForm from '../components/NewProductForm';
@@ -42,6 +42,7 @@ export default function Shop() {
 
                 {/* CREAR NUEVO PRODUCTO: */}
                 <Modal
+                    classNameWhenModalOpen='rounded-2xl bg-white p-6 text-left align-middle shadow-xl'
                     elementShownWhenModalIsClose={
                         <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                             Crear producto
