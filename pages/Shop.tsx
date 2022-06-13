@@ -7,8 +7,10 @@ import NewProductForm from '../components/NewProductForm';
 import ProductWithModal from '../components/ProductWithModal';
 import { useFirestorage } from '../hooks/useFirestorage';
 import { useShopingCart } from '../context/shopingCartContext';
+import { useUserAuth } from '../context/authContext';
 
 export default function Shop() {
+    const { user }: any = useUserAuth();
     const [productData, setProductData] = useState<any>(null);
     const [docs] = useFirestorage("products");
     const { shopingCart, setShopingCart, getNumberOfDifferentItems }: any = useShopingCart();
@@ -41,18 +43,20 @@ export default function Shop() {
 
 
                 {/* CREAR NUEVO PRODUCTO: */}
-                <Modal
-                    classNameWhenModalOpen='rounded-2xl bg-white p-6 text-left align-middle shadow-xl'
-                    elementShownWhenModalIsClose={
-                        <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                            Crear producto
-                        </button>
-                    }
-                    openModalButtonTitle='Crear producto'
-                    modalTitle='Crea un nuevo producto'
-                    cerrarModal={false}
-                    modalDescription={<NewProductForm setProductData={setProductData} />}
-                />
+                {user && user.rol == "admin" &&
+                    <Modal
+                        classNameWhenModalOpen='rounded-2xl bg-white p-6 text-left align-middle shadow-xl'
+                        elementShownWhenModalIsClose={
+                            <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                                Crear producto
+                            </button>
+                        }
+                        openModalButtonTitle='Crear producto'
+                        modalTitle='Crea un nuevo producto'
+                        cerrarModal={false}
+                        modalDescription={<NewProductForm setProductData={setProductData} />}
+                    />
+                }
 
                 <div className=" w-[80%] mx-auto p-5">
 
