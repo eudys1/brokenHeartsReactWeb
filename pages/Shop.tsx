@@ -1,53 +1,31 @@
-import { limit } from 'firebase/firestore';
 import Head from 'next/head'
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import Header from "../components/Header";
-import { useUserAuth } from '../context/authContext';
-import Router from 'next/router';
 import Modal from '../components/Modal';
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import NewProductForm from '../components/NewProductForm';
-import Product from '../components/SimpleProduct';
-import Image from 'next/image';
+
 import ProductWithModal from '../components/ProductWithModal';
 import { useFirestorage } from '../hooks/useFirestorage';
+import { useShopingCart } from '../context/shopingCartContext';
 
 export default function Shop() {
-    const { user }: any = useUserAuth();
     const [productData, setProductData] = useState<any>(null);
-
-    console.log("productData: ", productData);
-
-
-    async function checkout() {
-        const lineItems = [{
-            quantity: 1,
-            price_data: {
-                currency: 'eur',
-                unit_amount: (productData.precio) * 100,
-                product_data: {
-                    name: productData.nombre,
-                    description: productData.descripcion,
-                    // images: [productData.url],
+    const [docs] = useFirestorage("products");
+    const { shopingCart, setShopingCart, getNumberOfDifferentItems }: any = useShopingCart();
 
 
-                },
+    function addToShopingCart(product: any) {
 
-            },
-        },]
+        let shopingCartProduct: any = {};
+        shopingCartProduct.quantity = 1;
+        shopingCartProduct.product = product;
+        shopingCartProduct.productId = product.id;
 
-        const res = await fetch('/api/checkout', {
-            method: 'POST',
-            body: JSON.stringify(lineItems),
-        });
 
-        const data = await res.json();
-        console.log(data);
-
-        Router.push(data.session.url);
+        //keepping all the products in the shoping cart and adding new ones
+        setShopingCart([...shopingCart, shopingCartProduct], product);
     }
 
-    const [docs] = useFirestorage("products");
 
     return (
         <>
@@ -58,43 +36,41 @@ export default function Shop() {
 
             </Head>
 
-            <div className="bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg sticky top-0 h-[68px] w-full">
-                <Header className=' justify-between mx-32 ' />
-            </div>
-
-            <h1 className="text-4xl text-center my-10">Tienda</h1>
-
-            {/* CREAR NUEVO PRODUCTO: */}
-            <Modal
-                elementShownWhenModalIsClose={
-                    <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        Crear producto
-                    </button>
-                }
-                openModalButtonTitle='Crear producto'
-                modalTitle='Crea un nuevo producto'
-                cerrarModal={false}
-                modalDescription={<NewProductForm setProductData={setProductData} />}
-            />
-
-            <div className=" w-[80%] mx-auto p-5">
+            <Header className=' justify-between ' />
+            <div className="pt-28">
 
 
-
-                {/* PRODUCTOS: */}
-                <div className="grid grid-cols-1 md:grid-cols-3">
-
-                    {docs.map((item: any, index: number) => {
-                        return (
-                            <ProductWithModal key={index} productData={item} />
-                        )
-                    })
+                {/* CREAR NUEVO PRODUCTO: */}
+                <Modal
+                    elementShownWhenModalIsClose={
+                        <button className=" flex mx-auto rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                            Crear producto
+                        </button>
                     }
+                    openModalButtonTitle='Crear producto'
+                    modalTitle='Crea un nuevo producto'
+                    cerrarModal={false}
+                    modalDescription={<NewProductForm setProductData={setProductData} />}
+                />
+
+                <div className=" w-[80%] mx-auto p-5">
+
+                    {/* PRODUCTOS: */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7">
+
+                        {docs.map((item: any, index: number) => {
+
+                            return (
+                                <div key={index} className="">
+                                    <ProductWithModal productData={item} />
+                                    <button onClick={() => addToShopingCart(item)} className="mt-5 w-fit mx-auto px-5 py-3 block bg-slate-400 rounded text-white">Añadir al carrito</button>
+                                </div>
+                            )
+                        })
+                        }
+                    </div>
+
                 </div>
-
-
-                {/* <button onClick={checkout}>Comprar</button> */}
-
             </div>
 
         </>

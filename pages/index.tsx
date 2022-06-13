@@ -9,6 +9,12 @@ import Contact from '../components/Contact';
 
 export default function Home() {
 
+
+	if (typeof window !== 'undefined') {
+		console.log(localStorage.getItem("shopingCart"))
+		localStorage.removeItem('shopingCart');
+	}
+
 	return (
 		<div className="">
 			<Head>
@@ -17,8 +23,9 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{ backgroundImage: "url(/fondo-header.jpg)" }}>
-				<Header className='justify-between mx-32 mb-10' />
+			<Header className='justify-between ' />
+
+			<div className="pt-28 bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{ backgroundImage: "url(/fondo-header.jpg)" }}>
 
 				<div className='flex gap-10 justify-center items-center flex-col lg:flex-row lg:items-start'>
 					<div className="pt-24 ">
@@ -41,6 +48,7 @@ export default function Home() {
 			</div>
 
 			<div className="w-4/5 mx-auto py-10 my-5 flex border-b-2 border-zinc-300  flex-col items-center	font-['Arial'] text-[18px]">
+
 				<p>¡HOLA!,</p>
 				<p>Mi nombre es Jesús y soy fotógrafo.</p>
 				<p>Bienvenida, Bienvenido, llegaste a un lugar donde hay mucho por recorrer.</p>

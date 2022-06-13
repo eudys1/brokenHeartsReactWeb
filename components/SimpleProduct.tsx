@@ -8,16 +8,18 @@ interface SimpleProductProps {
     imageUrl?: string;
     category?: string;
     className?: string;
-    onClick?: () => void;
+    buttonTitle?: string;
+    onClickDiv?: () => void;
+    onClickButton?: () => void;
 }
 
 
-export default function SimpleProduct({ id, name, price, imageUrl = "", category, className = "" , onClick}: SimpleProductProps) {
+export default function SimpleProduct({buttonTitle, id, name, price, imageUrl = "", category, className = "" , onClickDiv, onClickButton}: SimpleProductProps) {
 
     return (
         <div className="w-fit mx-auto">
-            <div onClick={onClick} className={` ${className}`}>
-                <div className="relative h-full">
+            <div onClick={onClickDiv} className={` ${className}`}>
+                <div className="relative h-72">
                     <Image src={imageUrl} layout="fill" objectFit="contain" />
                 </div>
 
@@ -26,8 +28,10 @@ export default function SimpleProduct({ id, name, price, imageUrl = "", category
                 <strong className="">{price} €</strong>
 
             </div>
-            <button className=" w-fit mx-auto px-5 py-3 block bg-slate-400 rounded text-white">Añadir al carrito</button>
-
+            
+            {buttonTitle&&
+                <button onClick={onClickButton} className=" w-fit mx-auto px-5 py-3 block bg-slate-400 rounded text-white">Añadir al carrito</button>
+            }
         </div>
     )
 

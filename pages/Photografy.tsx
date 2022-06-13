@@ -14,11 +14,9 @@ export default function Photografy() {
                 
             </Head>
 
-            <div className="bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg sticky top-0 h-[68px] w-full">
-                <Header className=' justify-between mx-32 ' />
-            </div>
+            <Header className='justify-between ' />
 
-            <h1 className="text-4xl text-center my-10">Fotografia</h1>
+            <h1 className="text-4xl text-center pt-28 my-10">Fotografia</h1>
 
             <div className="max-w-[90%] m-auto">
 

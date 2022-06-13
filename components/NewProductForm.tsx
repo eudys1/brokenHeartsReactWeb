@@ -16,7 +16,6 @@ const firestore = getFirestore(firebaseInit);
 const FormValidation = Yup.object().shape({
     nombre: Yup.string().required("Introduce un nombre"),
     precio: Yup.number().required("Define un precio al producto"),
-    images: Yup.array(),
 
 });
 
@@ -24,29 +23,36 @@ const FormValidation = Yup.object().shape({
 
 export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<any[]>([]);
+    const [currentCategory, setcurrentCategory] = useState('ropa')
+
+    const changeCategory = (newCategory: string) => {
+        setcurrentCategory(newCategory)
+    }
 
     async function handleOnSubmit(e: FormikValues) {
-        const formData = e;
+        const formData: any = {};
+        formData.quantity = 0;
+        formData.product = e;
         const urlImages: any[] = [];
 
-        formData.files = files;
-        formData.images = urlImages;
+        formData.product.files = files;
+        formData.product.images = urlImages;
 
 
         const docRef = doc(collection(firestore, "products"));
         setDoc(docRef, {
-            name: formData.nombre,
-            price: formData.precio,
-            images: formData.images,
-            description: formData.descripcion,
-            category: formData.categoria,
-            colors: formData.colores,
-            sizes: formData.tallas,
+            name: formData.product.nombre,
+            price: formData.product.precio,
+            images: formData.product.images,
+            description: formData.product.descripcion,
+            category: currentCategory,
+            colors: formData.product.colores,
+            sizes: formData.product.tallas,
         });
 
 
         //convert FileList to a normal Array
-        const arrayFiles = Array.from(formData.files);
+        const arrayFiles = Array.from(formData.product.files);
 
         arrayFiles.forEach((file: any) => {
             const storageRef = ref(storage, `productImages/${file.name}`);
@@ -56,7 +62,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                 uploadBytes(storageRef, file).then(
                     async () => {
                         await getDownloadURL(storageRef).then((url: any) => {
-                            formData.images.push(url);
+                            formData.product.images.push(url);
 
                             //update array of images of product to add the url
                             updateDoc(docRef, {
@@ -72,11 +78,6 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
             }
         });
 
-        console.log("urlImages: ", urlImages);
-        console.log("formData.images: ", formData.images);
-
-
-
 
         //sending data to father component
         //optional chaining (?.) 
@@ -85,7 +86,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
     }
 
     return (
-        <div>
+        <div className="">
             <Formik
                 initialValues={{ nombre: "", descripcion: "", precio: "", categoria: "", tallas: "", colores: "" }}
                 onSubmit={handleOnSubmit}
@@ -109,7 +110,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
 
                     <div className="mt-3">
                         <span>Elige una categoria: </span>
-                        <select name="categoria" defaultValue={1}>
+                        <select name="categoria" onChange={(e) => changeCategory(e.target.value)} value={currentCategory} >
                             <option value="ropa" >Ropa</option>
                             <option value="otros">Otros Productos</option>
                         </select>

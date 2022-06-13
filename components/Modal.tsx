@@ -32,7 +32,7 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
 
     return (
         <>
-            <div onClick={openModal} className="">
+            <div onClick={openModal} className="relative ">
                 {elementShownWhenModalIsClose}
             </div>
 
@@ -51,7 +51,7 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                        <div className="flex min-h-full items-center justify-center pt-16 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -61,7 +61,7 @@ export default function Modal({elementShownWhenModalIsClose, cerrarModal = true,
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-fit transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className=" transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     {/* {modalTitle && */}
                                     <Dialog.Title
                                         as="h3"

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserAuth } from "../context/authContext";
 import { useFirestorage } from "../hooks/useFirestorage";
 import UploadImage from "../functions/UploadImage";
-
+import Modal from "./Modal";
 
 //get with and height of image
 const getImageSize = (url: string) => {
@@ -81,14 +81,14 @@ export default function Gallery() {
 
     return (
         <>
-            {user && user.rol=="admin"&&
+            {user && user.rol == "admin" &&
 
-            <form action="" className="w-fit mx-auto my-5">
-                <label>
-                    <input type="file" onChange={handleUpload} className="hidden" />
-                    <span className="block w-16 h-16 text-5xl text-center text-[#2286FF] border-[#2286FF] rounded-full border-2  cursor-pointer hover:border-[#24599a] hover:text-[#24599a]">+</span>
-                </label>
-            </form>
+                <form action="" className="w-fit mx-auto my-5">
+                    <label>
+                        <input type="file" onChange={handleUpload} className="hidden" />
+                        <span className="block w-16 h-16 text-5xl text-center text-[#2286FF] border-[#2286FF] rounded-full border-2  cursor-pointer hover:border-[#24599a] hover:text-[#24599a]">+</span>
+                    </label>
+                </form>
             }
 
 
@@ -99,18 +99,26 @@ export default function Gallery() {
             <div className={` md:masonry-2-col lg:masonry-4-col  `}>
 
                 {
-                    docs &&
                     docs.map((doc: any, index) => {
                         // console.log("size", size);
 
                         { size && console.log("size: ", size[index]) }
                         return (
 
-                            <div key={doc.id} className="  ">
-                                {/* <Image key={doc.id}src={doc.url} alt={doc.name}  objectFit="contain" className="" /> */}
-                                <img className="pt-3" src={`${doc.url}`} alt={doc.name} />
-                                {/* <Image src={doc.url} alt={doc.name} width={size[index].width} height={size[index].height}/> */}
-                            </div>
+
+                            <Modal
+                                elementShownWhenModalIsClose={
+                                    <div className=" mb-5 hover:cursor-pointer shadow-xl">
+                                        {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
+                                        {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
+                                        <img src={doc.url} alt=""/>
+                                    </div>
+                                }
+                                modalDescription={
+                                    <img src={doc.url} alt=""/>
+                                }
+                            />
+
                         );
                     })
                 }
