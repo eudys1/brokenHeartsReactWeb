@@ -17,12 +17,12 @@ interface MoralProps {
     DescriptionClassNameWhenModalOpen?: string;
     style?: React.CSSProperties;
     showCrossCloseModal?: boolean;
-
+    titleButtonCloseModal?:React.ReactNode;
     cerrarModal?: boolean;
 
 }
 
-export default function Modal({ showCrossCloseModal = true, elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, classNameWhenModalOpen = "", classNameOfBackground = "", classNameWhenModalClose = "", DescriptionClassNameWhenModalOpen = "", style = {} }: MoralProps) {
+export default function Modal({titleButtonCloseModal="X", showCrossCloseModal = true, elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, classNameWhenModalOpen = "", classNameOfBackground = "", classNameWhenModalClose = "", DescriptionClassNameWhenModalOpen = "", style = {} }: MoralProps) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -74,7 +74,7 @@ export default function Modal({ showCrossCloseModal = true, elementShownWhenModa
                                         {modalTitle}
                                         
 
-                                            <div className='justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>{showCrossCloseModal &&"X"}</div>
+                                            <div className=' z-50 justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>{showCrossCloseModal && titleButtonCloseModal}</div>
                                         
                                     </Dialog.Title>
                                     {/* } */}

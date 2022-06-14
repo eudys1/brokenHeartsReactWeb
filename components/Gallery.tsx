@@ -4,7 +4,9 @@ import { useFirestorage } from "../hooks/useFirestorage";
 import UploadImage from "../functions/UploadImage";
 import Modal from "./Modal";
 import Image from "next/image";
-
+import deleteDocumentFromStorage from "../functions/deleteDocumentFromStorage";
+import { doc, deleteDoc, getFirestore } from "firebase/firestore";
+import { firebaseInit } from "../firebase";
 //get with and height of image
 const getImageSize = (url: string) => {
     return new Promise((resolve, reject) => {
@@ -41,7 +43,7 @@ export default function Gallery() {
     const [docs] = useFirestorage('galleryImages');
     // let size: any[] = [];
     const [size, setSize] = useState<Array<any>>([]);
-
+    const firestore = getFirestore(firebaseInit);
     const typesPermited = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg'];
 
     const handleUpload = (e: any) => {
@@ -80,6 +82,15 @@ export default function Gallery() {
 
     // console.log("size: ", size);
 
+    const deletePicture = async (directoryName: string, documentName: string, collectionName: string, documentId: string) => {
+
+        // await deleteDocumentFirebase(collectionName, documentId);
+        deleteDocumentFromStorage(directoryName,documentName);
+        
+        await deleteDoc(doc(firestore, collectionName, documentId));
+
+    }
+
     return (
         <>
             {user && user.rol == "admin" &&
@@ -102,26 +113,33 @@ export default function Gallery() {
                 {
                     docs.map((doc: any, index) => {
                         // console.log("size", size);
+                        // console.log("img: ",doc);
 
                         { size && console.log("size: ", size[index]) }
                         return (
 
 
                             <Modal key={index}
-                                showCrossCloseModal={false}
+                                showCrossCloseModal={true}
                                 elementShownWhenModalIsClose={
-                                    <div className=" mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
+                                    <div className="relative mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
                                         {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
                                         {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
                                         <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt="" />
                                     </div>
                                 }
                                 modalDescription={
-                                    <div className="w-[350px] lg:w-[900px] h-[550px]">
-                                        {/* <img className="w-fit h-fit" src={doc.url} alt="" /> */}
-                                        <Image src={doc.url} layout="fill" objectFit="contain" />
+                                    <div className={`w-[350px] lg:w-[900px] h-[550px]`}>
+                                        {/* <img className=" " src={doc.url} alt="" /> */}
+                                        <Image className="" src={doc.url} layout="fill" objectFit="contain" />
 
                                     </div>
+                                }
+                                titleButtonCloseModal={
+                                    // directoryName:string,documentName:string,collectionName:string,documentId:string
+                                    <button
+                                        onClick={() => deletePicture('', doc.name, 'galleryImages', doc.id)}
+                                        className="absolute top-0 right-0 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar foto</button>
                                 }
                             />
 
