@@ -7,7 +7,7 @@ import NoSsr from '../components/NoSsr';
 
 export default function Carrito() {
     const { user }: any = useUserAuth();
-    const { shopingCart, getTotalPrice }: any = useShopingCart();
+    const { shopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
 
     console.log(shopingCart);
 
@@ -58,15 +58,16 @@ export default function Carrito() {
                 <Header className=' justify-between ' />
 
             <h1 className="text-4xl text-center pt-28 my-10">Carrito</h1>
-            <div className="w-[90%] mx-auto  shadow-md rounded  ">
 
-                <div className="flex">
-                    <div className='w-3/4 bg-slate-400 p-5'>
+            <div className="w-[90%] mx-auto  shadow-lg rounded-lg overflow-hidden ">
+
+                <div className="flex flex-col lg:flex-row">
+                    <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 '>
                         {shopingCart.map((item: any, index: number) => {
                             return (
                                 // <div className="flex flex-row justify-between mb-4">
-                                <div key={index} className="flex flex-row justify-around">
-                                    <img src={item.product.images[0]} className="w-32 h-32" />
+                                <div key={index} className="flex flex-col w-fit mx-auto lg:w-full items-center lg:flex-row justify-around py-5">
+                                    <img src={item.product.images[0]} className="w-36 h-36" />
                                     <div className="text-xl flex flex-col">
                                         <span>{item.product.category}</span>
                                         <span>{item.product.name}</span>
@@ -75,21 +76,23 @@ export default function Carrito() {
                                         <input type="number" name="" id="" defaultValue={item.quantity} />
                                     </div>
                                     <strong>{item.product.price} €</strong>
+                                
                                 </div>
+
                                 // </div>
                             )
                         })
                         }
                     </div>
-                    <div className='w-1/4 flex flex-col p-5 bg-gray-300'>
+                    <div className='lg:w-1/4 flex flex-col p-5 gap-5 justify-center bg-gray-300'>
                         <strong>Subtotal: {getTotalPrice()} €</strong>
-                        <div className="">
-                        </div>
+                        <hr />
                         <strong>Envio:</strong>
                         <p>El envio se realizara mediante la empresa UPS o CorreosExpress</p>
                         <p>Coste: 3€</p>
+                        <hr />
                         <strong>Total: {getTotalPrice() + 3} €</strong>
-                        <button onClick={checkout} className="bg-red-300 w-fit py-3 px-5 rounded-md hover:bg-red-400">Terminar compra</button>
+                        <button onClick={checkout} className="bg-red-300  py-3 px-5 rounded-md hover:bg-red-400">Terminar compra</button>
                     </div>
                 </div>
 
