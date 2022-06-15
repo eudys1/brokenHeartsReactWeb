@@ -1,11 +1,26 @@
 import { useUserAuth } from "../context/authContext";
 import { useFirestorage } from "../hooks/useFirestorage";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 
 
 export default function Dashboard() {
     const { logOut, user }: any = useUserAuth();
     const [docs] = useFirestorage('usuarios');
+
+
+    // const functions = getFunctions();
+    // const deleteUser = httpsCallable(functions, 'deleteUser');
+
+    async function deleteUser(uid: any) {
+        const res = await fetch('/api/hello', {
+            method: 'POST',
+            body: JSON.stringify(uid),
+        });
+
+        const data = await res.json();
+        console.log(data);
+    }
 
     return (
         <div className="w-fit mx-auto text-center grow mt-5">
@@ -18,7 +33,14 @@ export default function Dashboard() {
                     <div className="flex flex-col gap-3 my-5">
                         {
                             docs.map((doc: any, index: number) => {
-                                return <span key={index}>{doc.nombre}, {doc.apellidos}, <strong>{doc.email}</strong></span>
+                                return (
+                                    <div key={index} className="">
+                                        <span >{doc.nombre}, {doc.apellidos}, <strong>{doc.email}</strong></span>
+                                        <button
+                                            onClick={() => deleteUser(doc.id)}
+                                            className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar usuario</button>
+                                    </div>
+                                )
 
                             })
                         }

@@ -3,21 +3,23 @@ import type { AppProps } from 'next/app';
 import { UserAuthContextProvider } from '../context/authContext';
 import Footer from '../components/Footer';
 import { ShopingCartContextProvider } from '../context/shopingCartContext';
+import Header from '../components/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <UserAuthContextProvider>
             <ShopingCartContextProvider>
-            {/* <AuthWeb> */}
+                {/* <AuthWeb> */}
                 <div className="flex flex-col h-screen">
                     <div className="grow">
+                        <Header className='justify-between ' />
                         <Component {...pageProps} />
                     </div>
-                    <div className='bg-black px-5 mt-5 '>
+                    <div className='bg-black px-5 mt-14 '>
                         <Footer className='text-center lg:text-left' />
                     </div>
                 </div>
-            {/* </AuthWeb> */}
+                {/* </AuthWeb> */}
             </ShopingCartContextProvider>
         </UserAuthContextProvider>
     )

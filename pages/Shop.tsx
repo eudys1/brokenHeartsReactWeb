@@ -38,7 +38,7 @@ export default function Shop() {
 
             </Head>
 
-            <Header className=' justify-between ' />
+            {/* <Header className=' justify-between ' /> */}
             <div className="pt-28">
 
 

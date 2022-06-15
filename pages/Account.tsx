@@ -3,12 +3,17 @@ import Head from 'next/head'
 import Header from "../components/Header";
 import Dashboard from "../components/Dashboard";
 import { useUserAuth } from "../context/authContext";
+import { getAuth } from "firebase/auth";
+import { firebaseInit } from "../firebase";
 
 
 
 export default function Account() {
 
     const { isLoading, user }: any = useUserAuth();
+
+    // console.log(user);
+    // getAuth().getUser("GIrpJxQeySe2pPQ4AbvhogPpdhh1");
 
 
     return (
@@ -20,7 +25,7 @@ export default function Account() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
 
-                <Header className=' justify-between ' />
+                {/* <Header className=' justify-between ' /> */}
 
                 <div className="pt-28">{user ? <Dashboard /> : <Login />}</div>
 

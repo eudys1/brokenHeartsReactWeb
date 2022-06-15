@@ -35,7 +35,7 @@ export default function Photografy() {
 
             </Head>
 
-            <Header className='justify-between ' />
+            {/* <Header className='justify-between ' /> */}
 
             {/* <h1 className="text-4xl text-center pt-28 my-10">Fotografia</h1> */}
 

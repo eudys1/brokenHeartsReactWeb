@@ -11,8 +11,8 @@ export default function Home() {
 
 
 	if (typeof window !== 'undefined') {
-		console.log(localStorage.getItem("shopingCart"))
 		localStorage.removeItem('shopingCart');
+		console.log(localStorage.getItem("shopingCart"))
 	}
 
 	return (
@@ -23,7 +23,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Header className='justify-between ' />
+			{/* <Header className='justify-between ' /> */}
 
 			<div className="pt-28 bg-no-repeat bg-cover bg-fixed min-h-[750px]" style={{ backgroundImage: "url(/fondo-header.jpg)" }}>
 

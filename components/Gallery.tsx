@@ -85,8 +85,8 @@ export default function Gallery() {
     const deletePicture = async (directoryName: string, documentName: string, collectionName: string, documentId: string) => {
 
         // await deleteDocumentFirebase(collectionName, documentId);
-        deleteDocumentFromStorage(directoryName,documentName);
-        
+        deleteDocumentFromStorage(directoryName, documentName);
+
         await deleteDoc(doc(firestore, collectionName, documentId));
 
     }
@@ -135,8 +135,10 @@ export default function Gallery() {
 
                                     </div>
                                 }
+
                                 titleButtonCloseModal={
                                     // directoryName:string,documentName:string,collectionName:string,documentId:string
+                                    user && user.rol == "admin" &&
                                     <button
                                         onClick={() => deletePicture('', doc.name, 'galleryImages', doc.id)}
                                         className="absolute top-0 right-0 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar foto</button>

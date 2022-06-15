@@ -55,7 +55,7 @@ export default function Carrito() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-                <Header className=' justify-between ' />
+            {/* <Header className=' justify-between ' /> */}
 
             <h1 className="text-4xl text-center pt-28 my-10">Carrito</h1>
 
@@ -72,11 +72,11 @@ export default function Carrito() {
                                         <span>{item.product.category}</span>
                                         <span>{item.product.name}</span>
                                     </div>
-                                    <div>
-                                        <input type="number" name="" id="" defaultValue={item.quantity} />
-                                    </div>
+
+                                    <input className='w-10 text-center border-2 border-[#2286FF] rounded-md' type="number" name="" id="" defaultValue={item.quantity} />
+
                                     <strong>{item.product.price} €</strong>
-                                
+
                                 </div>
 
                                 // </div>
