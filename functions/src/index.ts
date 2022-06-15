@@ -3,8 +3,6 @@
 // const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access Firestore.
-import admin = require("firebase-admin");
-admin.initializeApp();
 
 // exports.deleteUser = functions.https.onCall(async (data, context) => {
 // 	// if (!context.auth.token.admin) return
