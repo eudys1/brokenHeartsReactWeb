@@ -45,6 +45,7 @@ export default function Gallery() {
     const [size, setSize] = useState<Array<any>>([]);
     const firestore = getFirestore(firebaseInit);
     const typesPermited = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg'];
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleUpload = (e: any) => {
         //no multiple files allowed
@@ -75,8 +76,11 @@ export default function Gallery() {
                 });
         }
 
-        console.log("aaaaa", size);
-        console.log("aaaaa", size[2]);
+        if (docs.length == 0) {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
 
     }, [docs]);
 
@@ -108,49 +112,67 @@ export default function Gallery() {
 
             {console.log("ssss", docs)}
 
-            <div className={` md:masonry-2-col lg:masonry-4-col  `}>
 
-                {
-                    docs.map((doc: any, index) => {
-                        // console.log("size", size);
-                        // console.log("img: ",doc);
+            {isLoading ?
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" stroke="#2286FF" className='h-24 w-h-24 mx-auto lg:mt-28'>
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(1 1)" stroke-width="2">
+                            <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                            <path d="M36 18c0-9.94-8.06-18-18-18">
+                                <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite" />
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+                :
 
-                        { size && console.log("size: ", size[index]) }
-                        return (
+                docs.length == 0 && isLoading
+                    ? <p className="text-xl text-center lg:mt-32"> {"No hay fotos para mostrar :("} </p>
+                    :
+                    <div className={` md:masonry-2-col lg:masonry-4-col  `}>
 
+                        {
+                            docs.map((doc: any, index) => {
+                                // console.log("size", size);
+                                // console.log("img: ",doc);
 
-                            <Modal key={index}
-                                showCrossCloseModal={true}
-                                elementShownWhenModalIsClose={
-                                    <div className="relative mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
-                                        {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
-                                        {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
-                                        <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt="" />
-                                    </div>
-                                }
-                                modalDescription={
-                                    <div className={`w-[350px] lg:w-[900px] h-[550px]`}>
-                                        {/* <img className=" " src={doc.url} alt="" /> */}
-                                        <Image className="" src={doc.url} layout="fill" objectFit="contain" />
-
-                                    </div>
-                                }
-
-                                titleButtonCloseModal={
-                                    // directoryName:string,documentName:string,collectionName:string,documentId:string
-                                    user && user.rol == "admin" &&
-                                    <button
-                                        onClick={() => deletePicture('', doc.name, 'galleryImages', doc.id)}
-                                        className="absolute top-0 right-0 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar foto</button>
-                                }
-                            />
-
-                        );
-                    })
-                }
+                                { size && console.log("size: ", size[index]) }
+                                return (
 
 
-            </div>
+                                    <Modal key={index}
+                                        showCrossCloseModal={true}
+                                        elementShownWhenModalIsClose={
+                                            <div className="relative mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
+                                                {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
+                                                {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
+                                                <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt="" />
+                                            </div>
+                                        }
+                                        modalDescription={
+                                            <div className={`w-[350px] lg:w-[900px] h-[550px]`}>
+                                                {/* <img className=" " src={doc.url} alt="" /> */}
+                                                <Image className="" src={doc.url} layout="fill" objectFit="contain" />
+
+                                            </div>
+                                        }
+
+                                        titleButtonCloseModal={
+                                            // directoryName:string,documentName:string,collectionName:string,documentId:string
+                                            user && user.rol == "admin" &&
+                                            <button
+                                                onClick={() => deletePicture('', doc.name, 'galleryImages', doc.id)}
+                                                className="absolute top-0 right-0 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar foto</button>
+                                        }
+                                    />
+
+                                );
+                            })
+                        }
+
+
+                    </div>
+            }
         </>
     )
 }

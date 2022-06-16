@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from "../components/Header";
 import Modal from '../components/Modal';
 import NewProductForm from '../components/NewProductForm';
@@ -18,6 +18,17 @@ export default function Shop() {
     const [docs] = useFirestorage("products");
     const { shopingCart, setShopingCart, getNumberOfDifferentItems }: any = useShopingCart();
     const firestore = getFirestore(firebaseInit);
+    const [isLoading, setIsLoading] = useState(false);
+
+
+
+    useEffect(() => {
+        if (docs.length == 0) {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
+    }, [docs]);
 
 
     function addToShopingCart(product: any) {
@@ -51,7 +62,7 @@ export default function Shop() {
             </Head>
 
             {/* <Header className=' justify-between ' /> */}
-            <div className="w-[80%] mx-auto pt-28">
+            <div className="mx-5 lg:max-w-[80%] lg:mx-auto pt-28">
 
 
                 {/* CREAR NUEVO PRODUCTO: */}
@@ -73,21 +84,40 @@ export default function Shop() {
 
 
                 {/* PRODUCTOS: */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7 ">
-                    {docs.map((item: any, index: number) => {
-                        return (
-                            <div key={index} className="flex flex-col items-center">
-                                {user && user.rol == "admin" &&
-                                    <button onClick={() => deleteProduct('productImages', item.imageName, 'products', item.id)} className='self-end font-bold hover:text-red-700'>X</button>
-                                }
-                                <ProductWithModal productData={item} />
-                                <button onClick={() => addToShopingCart(item)} className="mt-3 py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Añadir al carrito</button>
-                            </div>
-                        )
-                    })
-                    }
-                </div>
+                {isLoading ?
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" stroke="#2286FF" className='h-24 w-h-24 mx-auto lg:mt-28'>
+                            <g fill="none" fill-rule="evenodd">
+                                <g transform="translate(1 1)" stroke-width="2">
+                                    <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                                        <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite" />
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    :
 
+                    docs.length == 0 && isLoading
+                        ? <p className="text-xl text-center lg:mt-32"> {"No hay productos para mostrar :("} </p>
+                        :
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7 ">
+                            {
+                                docs.map((item: any, index: number) => {
+                                    return (
+                                        <div key={index} className="flex flex-col items-center">
+                                            {user && user.rol == "admin" &&
+                                                <button onClick={() => deleteProduct('productImages', item.imageName, 'products', item.id)} className='self-end font-bold hover:text-red-700'>X</button>
+                                            }
+                                            <ProductWithModal productData={item} />
+                                            <button onClick={() => addToShopingCart(item)} className="mt-3 py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Añadir al carrito</button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+
+                }
             </div>
 
         </>

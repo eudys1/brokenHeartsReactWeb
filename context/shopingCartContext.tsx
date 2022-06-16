@@ -10,51 +10,44 @@ const shopingCartContext = createContext({});
 
 
 export function ShopingCartContextProvider({ children }: shopingCartContextProviderProps) {
-    // const [shopingCart, _setShopingCart] = useState<any[]>([]);
-    const [shopingCart, _setShopingCart] = useLocalStorage<any[]>("shopingCart",[]);
+    const [shopingCart, defaultSetShopingCart] = useLocalStorage<any[]>("shopingCart", []);
 
-    // if (typeof window !== 'undefined') {
-    //     localStorage.setItem("shopingCart", JSON.stringify(shopingCart));
-
-    //     console.log(JSON.parse(localStorage.getItem("shopingCart") || "[]"));
-    // }
-    
-    console.log("shopingCart: ", shopingCart);
-
+    //custom setter for the shoping cart
     const setShopingCart = (allProducts: any, oneProduct?: any) => {
         let shopingCartProduct: any = {};
 
-        console.log(shopingCart.some((item: any) => item.productId === oneProduct.id));
-
+        //check if product is already in shopingCart
         if (shopingCart.some((item: any) => item.productId === oneProduct.id)) {
 
             shopingCartProduct = shopingCart.find((item: any) => item.productId === oneProduct.id).quantity += 1;
 
         } else {
-            _setShopingCart(allProducts);
+            defaultSetShopingCart(allProducts);
         }
 
     }
 
-    
 
     //number of different items in the shoping cart
     function getNumberOfDifferentItems() {
         return shopingCart.length;
     }
 
-    function getTotalPrice() {
+
+    //total price of the shoping cart
+    function getTotalPrice(add: number) {
         let totalPrice = 0;
 
         shopingCart.forEach((item: any) => {
             totalPrice += item.product.price * item.quantity;
         });
-
-        return totalPrice;
+        add && (totalPrice += add);
+        return totalPrice.toFixed(2);
     }
 
+
     return (
-        <shopingCartContext.Provider value={{ shopingCart, setShopingCart, getNumberOfDifferentItems, getTotalPrice }}>
+        <shopingCartContext.Provider value={{ shopingCart, setShopingCart, defaultSetShopingCart, getNumberOfDifferentItems, getTotalPrice }}>
             {children}
         </shopingCartContext.Provider>
     )

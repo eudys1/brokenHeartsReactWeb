@@ -1,7 +1,7 @@
 export default function Privacy() {
 
     return (
-        <div className="max-w-[80%] bg-white mx-auto p-7 rounded-md shadow mt-28">
+        <div className="mx-5 lg:max-w-[80%] bg-white lg:mx-auto p-7 rounded-md shadow mt-28">
             <h1 className="text-4xl text-center">Política de privacidad</h1>
 
             <div className="my-8 ">

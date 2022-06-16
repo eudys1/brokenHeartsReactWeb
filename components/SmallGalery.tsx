@@ -6,7 +6,7 @@ export default function SmallGalery() {
 
     return (
 
-        <div className=' p-10'>
+        <div className=' py-10'>
             <div className="flex gap-10 mb-10 justify-center items-center flex-col lg:flex-row lg:items-start">
 
                 <ImageComponent src={"/marta.jpg"} width={250} height={300} alt={"marta"} scale />

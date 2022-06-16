@@ -9,10 +9,11 @@ interface ProductWithModalProps {
 }
 
 export default function ProductWithModal({ productData, className = "", onClickButton }: ProductWithModalProps) {
+// console.log(productData);
 
     return (
         <Modal
-            classNameWhenModalOpen="rounded-2xl bg-white p-6 text-left align-middle shadow-xl "
+            classNameWhenModalOpen="rounded-2xl bg-white p-6 text-left align-middle shadow-xl mx-2 "
             elementShownWhenModalIsClose={
                 <SimpleProduct
                     onClickButton={onClickButton}
@@ -24,22 +25,22 @@ export default function ProductWithModal({ productData, className = "", onClickB
                 />
             }
             modalDescription={
-                <div className='flex flex-col lg:flex-row items-center'>
+                <div className='flex flex-col lg:flex-row items-center max-w-[800px]'>
                     <div className='relative w-60 h-60 lg:h-[450px] lg:w-[450px]'>
                         <Image src={productData.images[0]} layout="fill" objectFit='contain' />
                     </div>
-                    <div className='flex flex-col text-center'>
-                        <span>{productData.name}</span>
+                    <div className='flex flex-col text-center px-10 gap-2 '>
+                        <span className="text-2xl">{productData.name}</span>
                         <strong>{productData.price} €</strong>
-                        <p>{productData.description}</p>
+                        <p >{productData.description} dddddddddddddddddddd break-all break-all break-all break-allbreak-allbreak-allbreak-allbreak-all</p>
 
-                        {/* <div> */}
+                        {/* <div>
                             <input className='border-2 rounded' type="number" name="" id="" />
                             <button className=" w-fit mx-auto px-5 py-3  bg-slate-400 rounded text-white">Añadir al carrito</button>
-                        {/* </div> */}
+                        </div> */}
 
-                        <hr />
-                        <span>{productData.category}</span>
+                        <hr className="m-5"/>
+                        <span className="text-slate-600">{productData.category}</span>
                     </div>
                 </div>
             }

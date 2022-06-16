@@ -27,7 +27,7 @@ export default function Account() {
 
                 {/* <Header className=' justify-between ' /> */}
 
-                <div className="pt-28">{user ? <Dashboard /> : <Login />}</div>
+                <div className="mx-5 lg:max-w-[80%] bg-white lg:mx-auto p-7 rounded-md shadow mt-28">{user ? <Dashboard /> : <Login />}</div>
 
 
             </>

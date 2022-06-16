@@ -8,9 +8,31 @@ import Link from 'next/link';
 
 export default function Carrito() {
     const { user }: any = useUserAuth();
-    const { shopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
+    const { shopingCart, defaultSetShopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
 
-    console.log(shopingCart);
+
+    function handleQuantity(currentQuantity: any, currentItem: any) {
+
+        //change quantity in shopingCart
+        shopingCart.forEach((item: any) => {
+            if (item.productId === currentItem.productId) {
+                item.quantity = Number(currentQuantity.target.value);
+            }
+        });
+
+        defaultSetShopingCart(shopingCart);
+    }
+
+    //delete item from shopingCart
+    function deleteProductFromCart(currentItem: any) {
+        shopingCart.forEach((item: any, index: number) => {
+            if (item.productId === currentItem.productId) {
+                shopingCart.splice(index, 1)
+            }
+        });
+        defaultSetShopingCart(shopingCart);
+    }
+
 
     async function checkout() {
         const lineItems: any = [];
@@ -32,7 +54,6 @@ export default function Carrito() {
             lineItems.push(lineItems2);
         });
 
-        console.log("ds", lineItems);
 
 
 
@@ -46,7 +67,6 @@ export default function Carrito() {
 
         Router.push(data.session.url);
     }
-    console.log(typeof shopingCart);
 
 
     return (
@@ -62,44 +82,45 @@ export default function Carrito() {
             <h1 className="text-4xl text-center pt-28 my-10">Carrito</h1>
 
             <div className="w-[80%] mx-auto   ">
-                {
-                    shopingCart.lenght == undefined ?
-                        <p className='text-xl text-center lg:mt-32'>El carrito está vacío, vuelve a la <Link href="/Shop"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> para ver todos nuestros productos disponibles.</p>
-                        :
-                        <div className="flex flex-col lg:flex-row shadow-lg rounded-lg overflow-hidden">
-                            <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 '>
-                                {shopingCart.map((item: any, index: number) => {
-                                    return (
-                                        // <div className="flex flex-row justify-between mb-4">
-                                        <div key={index} className="flex flex-col w-fit mx-auto lg:w-full items-center lg:flex-row justify-around py-5">
-                                            <img src={item.product.images[0]} className="w-36 h-36" />
-                                            <div className="text-xl flex flex-col">
-                                                <span>{item.product.category}</span>
-                                                <span>{item.product.name}</span>
-                                            </div>
-
-                                            <input className='w-10 text-center border-2 border-[#2286FF] rounded-md' type="number" name="" id="" defaultValue={item.quantity} />
-
-                                            <strong>{item.product.price} €</strong>
-
+                {Object.keys(shopingCart).length === 0
+                    ?
+                    <p className='text-xl text-center lg:mt-32'>El carrito está vacío, vuelve a la <Link href="/Shop"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> para ver todos nuestros productos disponibles.</p>
+                    :
+                    <div className="flex flex-col lg:flex-row shadow-lg rounded-lg overflow-hidden">
+                        <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 justify-center'>
+                            {shopingCart.map((item: any, index: number) => {
+                                return (
+                                    // <div className="flex flex-row justify-between mb-4">
+                                    <div key={index} className="flex flex-col w-fit mx-auto lg:w-full items-center lg:flex-row justify-around py-5">
+                                        <img src={item.product.images[0]} className="w-36 h-36" />
+                                        <div className="text-xl flex flex-col">
+                                            <span>{item.product.category}</span>
+                                            <span>{item.product.name}</span>
                                         </div>
 
-                                        // </div>
-                                    )
-                                })
-                                }
-                            </div>
-                            <div className='lg:w-1/4 flex flex-col p-5 gap-5 justify-center bg-gray-300'>
-                                <strong>Subtotal: {getTotalPrice()} €</strong>
-                                <hr />
-                                <strong>Envio:</strong>
-                                <p>El envio se realizara mediante la empresa UPS o CorreosExpress</p>
-                                <p>Coste: 3€</p>
-                                <hr />
-                                <strong>Total: {getTotalPrice() + 3} €</strong>
-                                <button onClick={checkout} className="py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Terminar compra</button>
-                            </div>
+                                        <input onChange={(currentQuantity) => handleQuantity(currentQuantity, item)} className='w-10 text-center border-2 border-[#2286FF] rounded-md' type="number" name="" id="" defaultValue={item.quantity} />
+
+                                        <strong>{item.product.price} €</strong>
+
+                                        <button onClick={() => deleteProductFromCart(item)} className='font-bold hover:text-red-700'>X</button>
+                                    </div>
+
+                                    // </div>
+                                )
+                            })
+                            }
                         </div>
+                        <div className='lg:w-1/4 flex flex-col p-5 gap-5 justify-center bg-gray-300'>
+                            <strong>Subtotal: {getTotalPrice()} €</strong>
+                            <hr />
+                            <strong>Envio:</strong>
+                            <p>El envio se realizara mediante la empresa UPS o CorreosExpress</p>
+                            <p>Coste: 3€</p>
+                            <hr />
+                            <strong>Total: {getTotalPrice(3)} €</strong>
+                            <button onClick={checkout} className="py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Terminar compra</button>
+                        </div>
+                    </div>
                 }
 
             </div>

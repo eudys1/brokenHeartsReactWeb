@@ -39,7 +39,7 @@ export default function Photografy() {
 
             {/* <h1 className="text-4xl text-center pt-28 my-10">Fotografia</h1> */}
 
-            <div className="max-w-[90%] pt-28 m-auto">
+            <div className="mx-5 lg:max-w-[80%] pt-28 lg:mx-auto">
                 <Carousel {...settings} className="mb-8">
                     
                     <div className="mx-3  ">

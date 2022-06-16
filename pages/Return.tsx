@@ -1,7 +1,7 @@
 export default function Return() {
 
     return (
-        <div className="max-w-[80%] bg-white mx-auto p-7 rounded-md shadow mt-28">
+        <div className="  mx-5 lg:max-w-[80%] bg-white lg:mx-auto p-7 rounded-md shadow mt-28 ">
             <h1 className="text-4xl text-center">Política de devoluciones y reembolsos</h1>
 
             <div className="my-8 ">
@@ -48,14 +48,14 @@ export default function Return() {
                 <p className="pb-4">Si aún no ha recibido un reembolso, primero verifique su cuenta bancaria nuevamente.</p>
                 <p className="pb-4">Luego, comuníquese con la compañía de su tarjeta de crédito, puede tomar algún tiempo antes de que se publique oficialmente su reembolso.</p>
                 <p className="pb-4">A continuación, póngase en contacto con su banco. A menudo hay algún tiempo de procesamiento antes de que se publique un reembolso.</p>
-                <p className="pb-4">Si ha hecho todo esto y aún no ha recibido su reembolso, comuníquese con nosotros a <a href="mailto:brokenheartsjerezbrand@gmail.com" className="font-bold">brokenheartsjerezbrand@gmail.com</a></p>
+                <p className="pb-4">Si ha hecho todo esto y aún no ha recibido su reembolso, comuníquese con nosotros a <a href="mailto:brokenheartsjerezbrand@gmail.com" className="font-bold break-all">brokenheartsjerezbrand@gmail.com</a></p>
                 <strong className="pb-4">Artículos en venta</strong>
                 <p className="pb-4">Solo se pueden reembolsar los artículos de precio regular. Los artículos en oferta no se pueden reembolsar.</p>
             </div>
 
             <div className="my-8 ">
                 <h2 className="pb-2 text-2xl text-[#2286FF]">Intercambios</h2>
-                <p>Solo reemplazamos artículos si están defectuosos o dañados. Si necesita cambiarlo por el mismo artículo, envíenos un correo electrónico a <a href="mailto:brokenheartsjerezbrand@gmail.com" className="font-bold">brokenheartsjerezbrand@gmail.com</a></p>
+                <p>Solo reemplazamos artículos si están defectuosos o dañados. Si necesita cambiarlo por el mismo artículo, envíenos un correo electrónico a <a href="mailto:brokenheartsjerezbrand@gmail.com" className="font-bold break-all">brokenheartsjerezbrand@gmail.com</a></p>
             </div>
 
             <div className="my-8 ">
