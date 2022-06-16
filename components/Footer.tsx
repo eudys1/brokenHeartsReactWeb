@@ -22,8 +22,8 @@ export default function Footer({ className }: FooterrProps) {
 
             <div className="flex flex-col text-white gap-3">
                 {/* <Link href="/Contact"><span className="font-['Arial'] font-bold text-[15px] cursor-pointer hover:text-[#2286FF] transition duration-200">Contacto</span></Link> */}
-                <Link href="/Privacity"><span className="font-['Arial'] font-bold text-[15px] cursor-pointer hover:text-[#2286FF] transition duration-200">Política de privacidad</span></Link>
-                <Link href="/Return"><span className="font-['Arial'] font-bold text-[15px] cursor-pointer hover:text-[#2286FF] transition duration-200">Política de devolucion y reembolsos</span></Link>
+                <Link href="/Privacity"><a className="font-['Arial'] font-bold text-[15px] cursor-pointer hover:text-[#2286FF] transition duration-200">Política de privacidad</a></Link>
+                <Link href="/Return"><a className="font-['Arial'] font-bold text-[15px] cursor-pointer hover:text-[#2286FF] transition duration-200">Política de devolucion y reembolsos</a></Link>
             </div>
         </div>
     )

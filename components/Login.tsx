@@ -85,8 +85,8 @@ export default function Login(className?: any) {
 
                         <div className={`flex flex-col lg:flex-row gap-5 justify-around mt-5`}>
 
-                            <button type='button' onClick={() => setIsRegister(!isRegister)} className={` lg:w-fit block py-3 px-10 bg-white text-[#2286FF] border-2 border-transparent hover:border-[#2286FF] rounded-md `}> {!isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
-                            <button type="submit" className={` py-3 px-10 lg:w-fit   text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md `}>{isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
+                            <button type='button' onClick={() => setIsRegister(!isRegister)} className={`lg:w-fit block py-3 px-10 bg-white text-[#2286FF] border-2 border-transparent hover:border-[#2286FF] rounded-md `}> {!isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
+                            <button type="submit" className={`py-3 px-10 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md `}>{isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
                         </div>
                     </Form>
                     {/* );

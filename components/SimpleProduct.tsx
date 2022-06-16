@@ -14,7 +14,7 @@ interface SimpleProductProps {
 }
 
 
-export default function SimpleProduct({buttonTitle, id, name, price, imageUrl = "", category, className = "" , onClickDiv, onClickButton}: SimpleProductProps) {
+export default function SimpleProduct({buttonTitle, id, name, price, imageUrl = "/", category, className = "" , onClickDiv, onClickButton}: SimpleProductProps) {
 
     return (
         <div className="w-fit mx-auto">

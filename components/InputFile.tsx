@@ -25,7 +25,9 @@ export default function InputFile({ className = "", multiple = false, onFileSele
 
     return (
         <div className={` ${className}`}>
-            <input type="file" name="imagenes" onChange={handleInput} multiple />
+            <input
+            className=" w-full bg-[#e9f1fe] rounded  cursor-pointer p-1" 
+            type="file" name="imagenes" onChange={handleInput} multiple required />
             {/* {error && <p className="text-[#ff0000]">{error}</p>} */}
         </div>
     )
