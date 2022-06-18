@@ -38,7 +38,6 @@ export default function Shop() {
         shopingCartProduct.product = product;
         shopingCartProduct.productId = product.id;
 
-
         //keepping all the products in the shoping cart and adding new ones
         setShopingCart([...shopingCart, shopingCartProduct], product);
     }
@@ -96,13 +95,15 @@ export default function Shop() {
                             </g>
                         </svg>
                     :
-
-                    docs.length == 0 && isLoading
+// check this:
+                    (docs.length == 0 && isLoading)
                         ? <p className="text-xl text-center lg:mt-32"> {"No hay productos para mostrar :("} </p>
                         :
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7 ">
                             {
                                 docs.map((item: any, index: number) => {
+                                    // console.log(item);
+                                    
                                     return (
                                         <div key={index} className="flex flex-col items-center">
                                             {user && user.rol == "admin" &&

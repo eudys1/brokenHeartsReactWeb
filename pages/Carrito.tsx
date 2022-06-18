@@ -33,7 +33,7 @@ export default function Carrito() {
         defaultSetShopingCart(shopingCart);
     }
 
-
+    //checkout function 
     async function checkout() {
         const lineItems: any = [];
 
@@ -89,16 +89,22 @@ export default function Carrito() {
                     <div className="flex flex-col lg:flex-row shadow-lg rounded-lg overflow-hidden">
                         <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 justify-center'>
                             {shopingCart.map((item: any, index: number) => {
+                                console.log(item);
+                                
                                 return (
                                     // <div className="flex flex-row justify-between mb-4">
                                     <div key={index} className="flex flex-col w-fit mx-auto lg:w-full items-center lg:flex-row justify-around py-5">
-                                        <img src={item.product.images[0]} className="w-36 h-36" />
-                                        <div className="text-xl flex flex-col">
-                                            <span>{item.product.category}</span>
-                                            <span>{item.product.name}</span>
+                                         {item.product.currentImage ?
+                                         <img src={item.product.currentImage} className="w-36 h-36" />
+                                         :
+                                         <img src={item.product.images[0]} className="w-36 h-36" />
+                                        }
+                                        <div className="flex flex-col">
+                                            {item.product.currentColor &&<span className='flex items-center gap-2'>Color: <span className='block w-4 h-4 rounded border' style={{backgroundColor:item.product.currentColor}}></span></span>}
+                                            <span className='text-xl '>{item.product.name}</span>
                                         </div>
 
-                                        <input onChange={(currentQuantity) => handleQuantity(currentQuantity, item)} className='w-10 text-center border-2 border-[#2286FF] rounded-md' type="number" name="" id="" defaultValue={item.quantity} />
+                                        <input onChange={(currentQuantity) => handleQuantity(currentQuantity, item)} min={0} max={99} className='w-10 text-center border-2 border-[#2286FF] rounded-md' type="number" name="" id="" defaultValue={item.quantity} />
 
                                         <strong>{item.product.price} €</strong>
 

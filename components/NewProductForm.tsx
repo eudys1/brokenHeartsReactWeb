@@ -40,6 +40,8 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
         formData.product.files = files;
         formData.product.images = urlImages;
         formData.product.imageName ="";
+        formData.product.currentImage = "";
+        formData.product.currentColor = "";
 
 
 
@@ -49,6 +51,8 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
             price: formData.product.precio,
             images: formData.product.images,
             imageName: formData.product.imageName,
+            currentImage: formData.product.currentImage,
+            currentColor: formData.product.currentColor,
             description: formData.product.descripcion,
             category: currentCategory,
             colors: formData.product.colores,
@@ -143,11 +147,11 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                     <div className="mb-4 flex gap-2 items-center flex-wrap">
                         <span>Colores:</span>
 
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="negro" />Negro</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="azul" />Azul</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="blanco" />Blanco</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="rojo" />Rojo</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="rosa" />Rosa</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="black" />Negro</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="blue-900" />Azul</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="white" />Blanco</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="red-700" />Rojo</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="colores" value="pink-600" />Rosa</label>
 
                     </div>
 
