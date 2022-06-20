@@ -41,7 +41,7 @@ export default function Header({ className }: HeaderProps) {
                                     <span className="absolute bottom-0 right-0 text-red-700 text-xs font-bold">{getNumberOfDifferentItems()}</span>
                                 }
 
-                                <Image src="/bxs-cart.svg" width={30} height={30} priority />
+                                <Image src="/bxs-cart.svg" alt="icono carrito de la compra" width={30} height={30} priority />
                             </div>
                         </NoSsr>
                     </a>

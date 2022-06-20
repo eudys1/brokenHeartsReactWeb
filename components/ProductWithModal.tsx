@@ -86,12 +86,13 @@ export default function ProductWithModal({ productData, className = "", onClickB
                     imageUrl={productData?.images[0]}
                     name={productData.name}
                     price={productData.price}
+                    alt={productData.name}
                 />
             }
             modalDescription={
                 <div className='flex flex-col lg:flex-row items-center max-w-[800px]'>
                     <div className='relative w-60 h-60 lg:min-h-[450px] lg:min-w-[450px]'>
-                        <Image src={image} layout="fill" objectFit='contain' unoptimized priority />
+                        <Image alt={productData.name} src={image} layout="fill" objectFit='contain' unoptimized priority />
                     </div>
                     <div className='flex flex-col text-center px-10 gap-2 '>
                         <span className="text-2xl">{productData.name}</span>

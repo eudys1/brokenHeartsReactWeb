@@ -88,6 +88,7 @@ export default function Gallery() {
 
                         {
                             docs.map((doc: any, index) => {
+console.log(doc);
 
                                 return (
 
@@ -97,13 +98,13 @@ export default function Gallery() {
                                             <div className="relative mb-5 hover:cursor-pointer transition duration-300 hover:grayscale hover:brightness-50 ">
                                                 {/* <Image  src={doc.url} width={size[index].width} height={size[index].height} /> */}
                                                 {/* <Image  src={doc.url} layout="fill" objectFit="contain" /> */}
-                                                <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt="" />
+                                                <img className="rounded-md shadow-[0_4px_15px_-5px_rgba(0,0,0,0.5)]" src={doc.url} alt={doc.name} />
                                             </div>
                                         }
                                         modalDescription={
                                             <div className={`w-[350px] lg:w-[900px] h-[550px]`}>
                                                 {/* <img className=" " src={doc.url} alt="" /> */}
-                                                <Image className="" src={doc.url} layout="fill" objectFit="contain" priority />
+                                                <Image alt={doc.name} src={doc.url} layout="fill" objectFit="contain" priority />
 
                                             </div>
                                         }

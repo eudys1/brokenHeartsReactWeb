@@ -11,16 +11,17 @@ interface SimpleProductProps {
     buttonTitle?: string;
     onClickDiv?: () => void;
     onClickButton?: () => void;
+    alt?: string;
 }
 
 
-export default function SimpleProduct({buttonTitle, id, name, price, imageUrl = "/", category, className = "" , onClickDiv, onClickButton}: SimpleProductProps) {
+export default function SimpleProduct({alt="", buttonTitle, id, name, price, imageUrl = "/", category, className = "" , onClickDiv, onClickButton}: SimpleProductProps) {
 
     return (
         <div className="w-fit mx-auto">
             <div onClick={onClickDiv} className={` ${className}`}>
                 <div className="relative h-72">
-                    <Image src={imageUrl} layout="fill" objectFit="contain" unoptimized priority/>
+                    <Image src={imageUrl} alt={alt} layout="fill" objectFit="contain" unoptimized priority/>
                 </div>
 
                 <span className="text-gray-500">{category}</span>
