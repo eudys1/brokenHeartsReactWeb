@@ -11,7 +11,7 @@ import deleteDocumentFromStorage from '../functions/deleteDocumentFromStorage';
 import { deleteDoc, doc, getFirestore } from 'firebase/firestore';
 import { firebaseInit } from '../firebase';
 
-export default function Shop() {
+export default function Tienda() {
     const { user }: any = useUserAuth();
     const [productData, setProductData] = useState<any>(null);
     const [docs] = useFirestorage("products");

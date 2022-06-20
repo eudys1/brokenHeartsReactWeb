@@ -40,10 +40,9 @@ export default function Login(className?: any) {
 
     
     return (
-        <>
+        <div className=''>
 
-
-            <div className={`mx-7 lg:w-[600px] lg:mx-auto bg-white rounded-lg py-7 px-10 my-10 flex flex-col ${className}`}>
+            <div className={`lg:w-[600px] mx-auto bg-white rounded-lg py-7 px-6 my-10 flex flex-col ${className}`}>
                 <Formik
                     initialValues={{ nombre: "", apellidos: "", email: "", password: "" }}
                     onSubmit={handleOnSubmit}
@@ -95,7 +94,7 @@ export default function Login(className?: any) {
                 <a onClick={handleGoogleLogin} className='self-center flex items-center hover:cursor-pointer text-[#2286FF] hover:text-[#24599a] mt-8'>Iniciar sesión con <FcGoogle className='ml-4 'size={25}/></a>
 
             </div>
-        </>
+        </div>
     )
 }
 

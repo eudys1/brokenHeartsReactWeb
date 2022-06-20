@@ -29,10 +29,10 @@ export default function Header({ className }: HeaderProps) {
             
             <div className="hidden lg:flex gap-6 items-center text-white z-10">
                 <Link href="/"><a className="transition duration-300 hover:scale-125 " >Inicio</a></Link>
-                <Link href="/Photografy"><a className="transition duration-300 hover:scale-125" >Fotografía</a></Link>
-                <Link href="/Shop"><a className="transition duration-300 hover:scale-125" >Tienda</a></Link>
+                <Link href="/Fotografia"><a className="transition duration-300 hover:scale-125" >Fotografía</a></Link>
+                <Link href="/Tienda"><a className="transition duration-300 hover:scale-125" >Tienda</a></Link>
 
-                <Link href="/Account"><a className=" pl-10 transition duration-300 hover:scale-125 w-max" > <Image src="/bx-user.svg" width={30} height={30} /></a></Link>
+                <Link href="/Cuenta"><a className=" pl-10 transition duration-300 hover:scale-125 w-max" > <Image src="/bx-user.svg" width={30} height={30} /></a></Link>
                 <Link href="/Carrito">
                     <a className="transition duration-300 hover:scale-125 w-max" >
                         <NoSsr>

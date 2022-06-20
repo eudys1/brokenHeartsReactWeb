@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
-export default function Photografy() {
+export default function Fotografia() {
 
     const settings = {
         centerMode: true,

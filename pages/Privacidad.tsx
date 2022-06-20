@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default function Privacy() {
+export default function Privacidad() {
 
     return (
         <>

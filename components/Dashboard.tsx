@@ -67,7 +67,7 @@ export default function Dashboard() {
     }
 
     return (
-        <div className=" mx-auto grow mt-5">
+        <div className="bg-white p-7 rounded-md shadow  mx-auto grow mt-5">
 
             {user &&
                 user.rol == "admin" ?
@@ -103,9 +103,9 @@ export default function Dashboard() {
                 :
                 <div>
                     <h1 className="text-3xl text-center">Eres un CLIENTE</h1>
-                    <span className="text-lg">Datos de tu cuenta:</span>
-                    <div className="flex flex-col gap-3 my-5">
-                        <div className="flex flex-col lg:flex-row items-center gap-3 px-5 py-7 shadow-md rounded border min-w-[250px] md:min-w-[460px] min-h-[200px]">
+                    <span className="block text-lg text-center my-6">Datos de tu cuenta:</span>
+                    <div className="flex flex-col gap-3 my-5 items-center">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 px-5 py-7 shadow-md rounded border min-w-[250px] md:max-w-[500px] min-h-[200px]">
 
                             <label className="hover:cursor-pointer">
                                 <input type="file" className="hidden" onChange={(e) => changePicture(e, user)} />

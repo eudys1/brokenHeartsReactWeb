@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default function Return() {
+export default function Devolucion() {
 
     return (
         <>
