@@ -5,7 +5,7 @@ import Stripe from 'stripe';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const body = JSON.parse(req.body);
-    console.log("body", body);
+    // console.log("body", body);
 
     try {
         const stripe = new Stripe('sk_test_51L6H1fDMm2ApmieUs6wUI8OxjIaJQxFNjM4rqRfyaDtCJhcyNdeOYLUlmll4CmRYxbKyfPHXWLMOB0QufqsPI9io005tujdvhV',
