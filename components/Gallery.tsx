@@ -7,45 +7,16 @@ import Image from "next/image";
 import deleteDocumentFromStorage from "../functions/deleteDocumentFromStorage";
 import { doc, deleteDoc, getFirestore } from "firebase/firestore";
 import { firebaseInit } from "../firebase";
-//get with and height of image
-const getImageSize = (url: string) => {
-    return new Promise((resolve, reject) => {
-        const img = new window.Image();
-        let wi;
-        let he;
-        img.onload = () => {
-            resolve({ width: img.naturalWidth, height: img.naturalHeight });
-            wi = img.naturalWidth;
-            he = img.naturalHeight;
-        };
-        img.onerror = () => {
-            reject(new Error("Error loading image"));
-        };
-        img.src = url;
-        // console.log(wi, he);
 
-    });
-};
-
-async function runGetImageSize(url: string) {
-
-    const img = await getImageSize(url);
-
-    // console.log("dddd: ", img);
-    return img;
-
-}
 
 export default function Gallery() {
     const { user }: any = useUserAuth();
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
     const [docs] = useFirestorage('galleryImages');
-    // let size: any[] = [];
-    const [size, setSize] = useState<Array<any>>([]);
     const firestore = getFirestore(firebaseInit);
     const typesPermited = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg'];
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleUpload = (e: any) => {
         //no multiple files allowed
@@ -64,33 +35,19 @@ export default function Gallery() {
 
     useEffect(() => {
 
-        {
-            docs &&
-                docs.map(async (doc: any) => {
-                    // console.log(doc);
-                    const x: any = await runGetImageSize(doc.url);
-                    console.log("x: ", x.width);
-                    // setSize(size.push(x));
-                    size.push(x);
-
-                });
-        }
-
         if (docs.length == 0) {
-            setIsLoading(true);
-        } else {
             setIsLoading(false);
         }
 
     }, [docs]);
 
-    // console.log("size: ", size);
+
 
     const deletePicture = async (directoryName: string, documentName: string, collectionName: string, documentId: string) => {
 
-        // await deleteDocumentFirebase(collectionName, documentId);
         deleteDocumentFromStorage(directoryName, documentName);
-
+        
+        //delete from firestore
         await deleteDoc(doc(firestore, collectionName, documentId));
 
     }
@@ -110,8 +67,6 @@ export default function Gallery() {
 
             {error && <p className="text-red-500 text-center">{error}</p>}
 
-            {console.log("ssss", docs)}
-
 
             {isLoading ?
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" stroke="#2286FF" className='h-24 w-h-24 mx-auto lg:mt-28'>
@@ -126,19 +81,15 @@ export default function Gallery() {
                 </svg>
                 :
 
-                docs.length == 0 && isLoading
+                (docs.length == 0 && !isLoading)
                     ? <p className="text-xl text-center lg:mt-32"> {"No hay fotos para mostrar :("} </p>
                     :
                     <div className={` md:masonry-2-col lg:masonry-4-col  `}>
 
                         {
                             docs.map((doc: any, index) => {
-                                // console.log("size", size);
-                                // console.log("img: ",doc);
 
-                                { size && console.log("size: ", size[index]) }
                                 return (
-
 
                                     <Modal key={index}
                                         showCrossCloseModal={true}
@@ -152,16 +103,15 @@ export default function Gallery() {
                                         modalDescription={
                                             <div className={`w-[350px] lg:w-[900px] h-[550px]`}>
                                                 {/* <img className=" " src={doc.url} alt="" /> */}
-                                                <Image className="" src={doc.url} layout="fill" objectFit="contain" />
+                                                <Image className="" src={doc.url} layout="fill" objectFit="contain" priority />
 
                                             </div>
                                         }
 
                                         titleButtonCloseModal={
-                                            // directoryName:string,documentName:string,collectionName:string,documentId:string
                                             user && user.rol == "admin" &&
                                             <button
-                                                onClick={() => deletePicture('', doc.name, 'galleryImages', doc.id)}
+                                                onClick={() => deletePicture('galleryImages', doc.name, 'galleryImages', doc.id)}
                                                 className="absolute top-0 right-0 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">Eliminar foto</button>
                                         }
                                     />

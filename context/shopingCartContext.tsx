@@ -14,25 +14,14 @@ export function ShopingCartContextProvider({ children }: shopingCartContextProvi
 
     //custom setter for the shoping cart
     const setShopingCart = (allProducts: any, oneProduct?: any) => {
-        let shopingCartProduct: any = {};
+        // let shopingCartProduct: any = {};
 
-        
+
         //check if product is already in shopingCart
-        if (shopingCart.some((item: any) => item.productId === oneProduct.id)) {
+        if (shopingCart.some((item: any) => item.productId == oneProduct.id && item.product.currentColor == oneProduct.currentColor)) {
+            //
+            shopingCart.find((item: any) => item.productId == oneProduct.id && item.product.currentColor == oneProduct.currentColor).quantity += 1
 
-            // Object.keys(shopingCart).forEach((index: any) => {
-            //     shopingCart[index].product.currentColor != oneProduct.currentColor &&
-            //         // ?
-            //         // setShopingCart([...shopingCart, shopingCartProduct], product)
-            //     // :
-            //     defaultSetShopingCart(allProducts)
-    
-            //     // console.log(shopingCart[index].product);
-            //     // console.log(product);
-    
-            // });
-
-            shopingCartProduct = shopingCart.find((item: any) => item.productId === oneProduct.id).quantity += 1;
 
         } else {
             defaultSetShopingCart(allProducts);

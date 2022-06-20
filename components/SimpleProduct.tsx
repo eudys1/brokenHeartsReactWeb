@@ -20,7 +20,7 @@ export default function SimpleProduct({buttonTitle, id, name, price, imageUrl = 
         <div className="w-fit mx-auto">
             <div onClick={onClickDiv} className={` ${className}`}>
                 <div className="relative h-72">
-                    <Image src={imageUrl} layout="fill" objectFit="contain" />
+                    <Image src={imageUrl} layout="fill" objectFit="contain" unoptimized priority/>
                 </div>
 
                 <span className="text-gray-500">{category}</span>

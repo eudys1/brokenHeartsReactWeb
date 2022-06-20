@@ -11,6 +11,7 @@ interface saveUserInFirestorageProps {
     apellidos?: React.ReactNode;
     email?: React.ReactNode;
     rol?: React.ReactNode;
+    profilePicture?: React.ReactNode;
 }
 
 interface UserAuthContextProviderProps {
@@ -24,10 +25,10 @@ const userAuthContext = createContext({});
 // const userAuthContext = createContext<any>(null);
 
 //function to save user in firestore
-function saveUserInFirestorage({ userUid = "", nombre = "", apellidos = "", email = "", rol = "client" }: saveUserInFirestorageProps) {
+function saveUserInFirestorage({ userUid = "", nombre = "", apellidos = "", email = "", rol = "client",profilePicture="" }: saveUserInFirestorageProps) {
 
     const docRef = doc(firestore, `usuarios/${userUid}`);
-    setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol });
+    setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol, profilePicture: profilePicture });
 }
 
 
@@ -59,6 +60,7 @@ export function UserAuthContextProvider({ children }: UserAuthContextProviderPro
             nombre: userInfo.nombre,
             apellidos: userInfo.apellidos,
             rol: userInfo.rol,
+            profilePicture: userInfo.profilePicture,
         };
 
         setUser(userData);
@@ -67,18 +69,12 @@ export function UserAuthContextProvider({ children }: UserAuthContextProviderPro
     }
 
     //create an user and save it in the database
-    function signUp(nombre: string, apellidos: string, email: string, password: string, rol = "client") {
+    function signUp(nombre: string, apellidos: string, email: string, password: string, rol = "client", profilePicture = "/defaultProfilePicture.png") {
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in
-
-                //-TODO:use function saveUserInFirestorage here
                 const user = userCredential.user;
-
-                saveUserInFirestorage({ userUid: user.uid, nombre: nombre, apellidos: apellidos, email: email, rol: rol });
-                // const docRef = doc(firestore, `usuarios/${user.uid}`);
-                // setDoc(docRef, { nombre: nombre, apellidos: apellidos, email: email, rol: rol });
+                saveUserInFirestorage({ userUid: user.uid, nombre: nombre, apellidos: apellidos, email: email, rol: rol, profilePicture: profilePicture });
 
                 return user;
             })
@@ -117,7 +113,7 @@ export function UserAuthContextProvider({ children }: UserAuthContextProviderPro
                 // The signed-in user info.
                 const user = result.user;
 
-                saveUserInFirestorage({ userUid: user.uid, nombre: user.displayName, email: user.email, rol: "client" });
+                saveUserInFirestorage({ userUid: user.uid, nombre: user.displayName, email: user.email, rol: "client",profilePicture : "/defaultProfilePicture.png" });
 
             })
             .catch((error) => {
@@ -143,20 +139,12 @@ export function UserAuthContextProvider({ children }: UserAuthContextProviderPro
 
     //to control the login of the users
     useEffect(() => {
-        //current way that i've done:
+        
         onAuthStateChanged(auth, async (firebaseUser: any) => {
             (!user && firebaseUser) && await setFirebaseUserWithNecesaryData(firebaseUser);
             !firebaseUser && setUser(null);
             setIsLoading(false);
         });
-
-        //another way to do it:
-        // const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
-        //     setUser(currentUser);
-        // });
-        // return () => {
-        //     unsubscribe();
-        // };
 
     }, []);
 

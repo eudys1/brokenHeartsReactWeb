@@ -35,7 +35,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             to: `brokenheartsjerezbrand@gmail.com`, // list of receivers
             subject: "Contacta con nosotros, dudas", // Subject line
             // text: "Hello world?", // plain text body
-            html:`<p> Nombre: ${body.nombre}, Apellidos: ${body.apellidos}, Email: ${body.email} <br/> Dudas:<${body.dudas}</p>`, // html body
+            html:`<div> 
+            <p> <strong>Nombre: </strong> ${body.nombre},<strong> Apellidos: </strong> ${body.apellidos}, <strong>Email: </strong> ${body.email} </p>
+            <p> <strong>Dudas: </strong> ${body.dudas} </p>
+            </div>`, // html body
         });
 
         res.status(200).json({ message: "ok" });

@@ -23,7 +23,7 @@ const FormValidation = Yup.object().shape({
 //TODO:loading animation when a new product is created
 export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<any[]>([]);
-    const [currentCategory, setcurrentCategory] = useState('ropa');
+    const [currentCategory, setcurrentCategory] = useState('Ropa');
     const [isLoading, setIsLoading] = useState(false);
 
     const changeCategory = (newCategory: string) => {
@@ -42,6 +42,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
         formData.product.imageName ="";
         formData.product.currentImage = "";
         formData.product.currentColor = "";
+        formData.product.currentSize = "";
 
 
 
@@ -53,6 +54,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
             imageName: formData.product.imageName,
             currentImage: formData.product.currentImage,
             currentColor: formData.product.currentColor,
+            currentSize: formData.product.currentSize,
             description: formData.product.descripcion,
             category: currentCategory,
             colors: formData.product.colores,
@@ -65,7 +67,6 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
 
         arrayFiles.forEach((file: any) => {
             const storageRef = ref(storage, `productImages/${file.name}`);
-            console.log(file);
 
             try {
                 //upload image to storage
@@ -96,6 +97,7 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
 
         //reset form values
         (document.getElementById('product-form') as HTMLFormElement).reset();
+        
         setTimeout(() => {
             setIsLoading(false);
         }, 1000);
@@ -127,8 +129,8 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                     <div className="mt-3 flex gap-2">
                         <span>Elige una categoria: </span>
                         <select className="border-2 border-[#2286FF] rounded-md text-center" name="categoria" onChange={(e) => changeCategory(e.target.value)} value={currentCategory} >
-                            <option value="ropa">Ropa</option>
-                            <option value="otros">Otros Productos</option>
+                            <option value="Ropa">Ropa</option>
+                            <option value="Otros Productos">Otros Productos</option>
                         </select>
                     </div>
 

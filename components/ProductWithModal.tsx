@@ -1,7 +1,6 @@
 import Modal from "./Modal";
 import Image from "next/image";
 import SimpleProduct from "./SimpleProduct";
-import { useFirestorage } from "../hooks/useFirestorage";
 import { useEffect, useState } from "react";
 import { useShopingCart } from "../context/shopingCartContext";
 
@@ -12,16 +11,25 @@ interface ProductWithModalProps {
 }
 
 export default function ProductWithModal({ productData, className = "", onClickButton }: ProductWithModalProps) {
-    const [docs] = useFirestorage("products");
     const [image, setImage] = useState<any>(productData.images[0]);
+    const [size, setSize] = useState<string>("");
     const { shopingCart, defaultSetShopingCart, setShopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
+    const colors = ["black", "blue", "pink", "red"];
 
     useEffect(() => {
-        console.log("sss", productData);
         productData.currentImage = image
 
-    }, [image]);
+    }, [image, []]);
 
+    useEffect(() => {
+        //setting the default color of the product 
+        colors.forEach((color: any) => {
+            if (image?.includes(color)) {
+                productData.currentColor = color;
+            }
+        });
+
+    }, []);
 
     function handleColor(color: any, currentProduct: any) {
 
@@ -32,31 +40,37 @@ export default function ProductWithModal({ productData, className = "", onClickB
             )
 
         })
-        // defaultSetShopingCart(shopingCart);
 
     }
 
+    function handleSize(size: any, currentProduct: any) {
 
-    function addToShopingCart(product: any) {
+        console.log(size.target.value);
+        // setSize(size.target.value);
+        productData.currentSize = size.target.value;
+        // Object.keys(productData.sizes).forEach((index: string) => {
+        //     productData.sizes[index].includes(size.target.value.split("-")[0]) && (
+        //         setImage(productData.sizes[index]),
+        //         productData.currentSize = size.target.value.split("-")[0]
+        //     )
+
+        // })
+
+    }
+
+    function addToShopingCart(product: any, imageColor: any) {
 
         const shopingCartProduct: any = {};
         shopingCartProduct.quantity = 1;
         shopingCartProduct.product = product;
         shopingCartProduct.productId = product.id;
 
-        Object.keys(shopingCart).forEach((index: string) => {
-            shopingCart[index].product.currentColor == product.currentColor
-                ?
-                setShopingCart([...shopingCart, shopingCartProduct], product)
-                :
-                defaultSetShopingCart([...shopingCart, shopingCartProduct])
+        shopingCart.length == 0
+            ?
+            defaultSetShopingCart([...shopingCart, shopingCartProduct])
+            :
+            setShopingCart([...shopingCart, shopingCartProduct], product);
 
-            // console.log(shopingCart[index].product);
-            // console.log(product);
-
-        });
-
-        //keepping all the products in the shoping cart and adding new ones
     }
 
 
@@ -69,7 +83,7 @@ export default function ProductWithModal({ productData, className = "", onClickB
                     onClickButton={onClickButton}
                     className='w-72 h-96 flex flex-col text-center hover:cursor-pointer gap-2'
                     category={productData.category}
-                    imageUrl={productData.images[0]}
+                    imageUrl={productData?.images[0]}
                     name={productData.name}
                     price={productData.price}
                 />
@@ -77,29 +91,50 @@ export default function ProductWithModal({ productData, className = "", onClickB
             modalDescription={
                 <div className='flex flex-col lg:flex-row items-center max-w-[800px]'>
                     <div className='relative w-60 h-60 lg:min-h-[450px] lg:min-w-[450px]'>
-                        <Image src={image} layout="fill" objectFit='contain' />
+                        <Image src={image} layout="fill" objectFit='contain' unoptimized priority />
                     </div>
                     <div className='flex flex-col text-center px-10 gap-2 '>
                         <span className="text-2xl">{productData.name}</span>
                         <strong>{productData.price} €</strong>
                         <p >{productData.description} </p>
-                        <div className="flex">
+                    
+                        {productData.colors &&
+                        <div className="flex justify-center">
                             {Object.keys(productData.colors).map((index: string) => {
 
                                 return (
                                     <button key={index}
                                         onClick={(color) => handleColor(color, productData)}
                                         value={productData.colors[index]}
-                                        className={`border border-black rounded h-4 w-4 mr-2 mt-1 mb-1 bg-${productData.colors[index]}`} />
+                                        style={{ backgroundColor: productData.colors[index].split("-")[0] }}
+                                        className={`border border-black rounded h-4 w-4 mr-2 mt-1 mb-1 `} />
                                 )
                             })
                             }
-
                         </div>
+                        }
+
+                        {productData.sizes &&
+                        <div className="flex justify-center gap-2">
+                            {Object.keys(productData.sizes).map((index: string) => {
+
+                                return (
+                                    <button key={index}
+                                        onClick={(size) => handleSize(size, productData)}
+                                        value={productData.sizes[index]}
+                                        className={`flex justify-center items-center border border-black rounded h-7 w-7 text-sm focus:font-bold focus:bg-blue-500 focus:text-white  `} >
+                                        {productData.sizes[index].toUpperCase()}
+                                    </button>
+                                )
+                            })
+                            }
+                        </div>
+                    
+                        }
 
                         <div>
                             {/* <input className='border-2 rounded' type="number" name="" id="" /> */}
-                            <button onClick={() => addToShopingCart(productData)} className="mt-3 py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Añadir al carrito</button>
+                            <button onClick={() => addToShopingCart(productData, image)} className="mt-3 py-3 px-7 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md">Añadir al carrito</button>
                         </div>
 
                         <hr className="m-5" />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { firebaseInit } from '../firebase';
 import { getAuth} from 'firebase/auth';
 import { useUserAuth } from '../context/authContext';
-
+import {FcGoogle} from 'react-icons/fc';
 
 const auth = getAuth(firebaseInit);
 
@@ -15,7 +15,6 @@ const FormValidation = Yup.object().shape({
     email: Yup.string().email("Introduce un email válido").required("Introduce un email"),
 
 });
-
 
 
 export default function Login(className?: any) {
@@ -30,11 +29,12 @@ export default function Login(className?: any) {
         const apellidos = userData.apellidos;
         const email = userData.email;
         const password = userData.password;
+        const profilePicture = userData.profilePicture;
 
         
         !isRegister ? await signUp(nombre, apellidos, email, password) : await logIn(auth, email, password);
         
-        console.log("No api", userData);
+        // console.log("No api", userData);
     }
     
 
@@ -89,12 +89,10 @@ export default function Login(className?: any) {
                             <button type="submit" className={`py-3 px-10 lg:w-fit text-white bg-[#2286FF] hover:bg-[#24599a] rounded-md `}>{isRegister ? 'Iniciar sesión' : 'Crear cuenta'}</button>
                         </div>
                     </Form>
-                    {/* );
-                    }} */}
 
                 </Formik>
 
-                <a onClick={handleGoogleLogin} className='self-center hover:cursor-pointer text-[#2286FF] hover:text-[#24599a] mt-8'>Iniciar sesión con Google</a>
+                <a onClick={handleGoogleLogin} className='self-center flex items-center hover:cursor-pointer text-[#2286FF] hover:text-[#24599a] mt-8'>Iniciar sesión con <FcGoogle className='ml-4 'size={25}/></a>
 
             </div>
         </>
