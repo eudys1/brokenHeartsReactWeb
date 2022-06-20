@@ -69,7 +69,7 @@ export default function Gallery() {
 
 
             {isLoading ?
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" stroke="#2286FF" className='h-24 w-h-24 mx-auto lg:mt-28'>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" stroke="#2286FF" className='h-24 w-h-24 mx-auto my-24 lg:mt-28'>
                     <g fill="none" fillRule="evenodd">
                         <g transform="translate(1 1)" strokeWidth="2">
                             <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
@@ -81,14 +81,13 @@ export default function Gallery() {
                 </svg>
                 :
 
-                (docs.length == 0 && !isLoading)
-                    ? <p className="text-xl text-center lg:mt-32"> {"No hay fotos para mostrar :("} </p>
-                    :
+                // (docs.length == 0 && !isLoading)
+                //     ? <p className="text-xl text-center lg:mt-32"> {"No hay fotos para mostrar :("} </p>
+                //     :
                     <div className={` md:masonry-2-col lg:masonry-4-col  `}>
 
                         {
                             docs.map((doc: any, index) => {
-console.log(doc);
 
                                 return (
 

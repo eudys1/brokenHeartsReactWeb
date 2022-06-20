@@ -20,8 +20,8 @@ const FormValidation = Yup.object().shape({
 });
 
 
-//TODO:loading animation when a new product is created
-export default function NewProductForm({ className = "", setProductData }: NewProductFormProps) {
+
+export default function NewProductForm({setProductData }: NewProductFormProps) {
     const [files, setFiles] = useState<any[]>([]);
     const [currentCategory, setcurrentCategory] = useState('Ropa');
     const [isLoading, setIsLoading] = useState(false);
@@ -137,12 +137,12 @@ export default function NewProductForm({ className = "", setProductData }: NewPr
                     <div className="my-4 flex gap-2 items-center flex-wrap">
                         <span>Tallas:</span>
 
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="xs" />XS</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="s" />S</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="m" />M</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="l" />L</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="xl" />XL</label>
-                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="xxl" />XXL</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="XS" />XS</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="S" />S</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="M" />M</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="L" />L</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="XL" />XL</label>
+                        <label className="flex flex-row items-center gap-1"><Field className="w-4 h-4" type="checkbox" name="tallas" value="XXL" />XXL</label>
 
                     </div>
 

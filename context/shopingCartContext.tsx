@@ -18,8 +18,11 @@ export function ShopingCartContextProvider({ children }: shopingCartContextProvi
 
 
         //check if product is already in shopingCart
-        if (shopingCart.some((item: any) => item.productId == oneProduct.id && item.product.currentColor == oneProduct.currentColor)) {
-            //
+        if (shopingCart.some((item: any) => item.productId == oneProduct.id &&
+            item.product.currentColor == oneProduct.currentColor &&
+            item.product.currentSize == oneProduct.currentSize)) {
+
+            //increment the quantity of the product
             shopingCart.find((item: any) => item.productId == oneProduct.id && item.product.currentColor == oneProduct.currentColor).quantity += 1
 
 

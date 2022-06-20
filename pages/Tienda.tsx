@@ -94,9 +94,9 @@ export default function Tienda() {
                     </svg>
                     :
                     // check this:
-                    (docs.length == 0 && !isLoading)
-                        ? <p className="text-xl text-center lg:mt-32"> {"No hay productos para mostrar :("} </p>
-                        :
+                    // (docs.length == 0 && !isLoading)
+                    //     ? <p className="text-xl text-center lg:mt-32"> {"No hay productos para mostrar :("} </p>
+                    //     :
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7 ">
                             {
                                 docs.map((item: any, index: number) => {

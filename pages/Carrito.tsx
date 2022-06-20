@@ -9,8 +9,6 @@ export default function Carrito() {
     const { shopingCart, defaultSetShopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
     const [quantity, setQuantity] = useState(1);
 
-    console.log(shopingCart);
-
     function handleQuantity(currentQuantity: any, currentItem: any) {
 
         //change quantity in shopingCart
@@ -101,7 +99,6 @@ export default function Carrito() {
                         <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 justify-center'>
                             {
                                 shopingCart.map((item: any, index: number) => {
-                                    console.log(item);
 
                                     return (
                                         // <div className="flex flex-row justify-between mb-4">
@@ -114,7 +111,7 @@ export default function Carrito() {
                                             <div className="flex flex-col">
                                                 <div className='flex gap-4'>
                                                     {item.product.currentColor != "" && <span className='flex items-center gap-2'>Color: <span className='block w-4 h-4 rounded border' style={{ backgroundColor: item.product.currentColor }}></span></span>}
-                                                    {item.product.currentSize != "" && <span className='flex items-center gap-2'>Talla: <span className='flex justify-center items-center border border-black rounded h-6 w-6 text-sm' >{item.product.currentSize[index].toUpperCase()}</span></span>}
+                                                    {item.product.currentSize != "" && <span className='flex items-center gap-2'>Talla: <span className='flex justify-center items-center border border-black rounded h-6 w-6 text-sm' >{item.product.currentSize}</span></span>}
                                                 </div>
                                                 <span className='text-xl '>{item.product.name}</span>
                                             </div>
