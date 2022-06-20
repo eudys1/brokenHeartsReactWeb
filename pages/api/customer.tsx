@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Stripe from 'stripe';
 
 export default async function ProductListStripe(req: NextApiRequest, res: NextApiResponse) {
 
