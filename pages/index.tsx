@@ -3,6 +3,7 @@ import Image from "next/image";
 import SmallGalery from '../components/SmallGalery';
 import Link from 'next/link';
 import Contact from '../components/Contact';
+import ImageComponent from '../components/ImageComponent';
 
 
 
@@ -31,19 +32,13 @@ export default function Home() {
 
 				<div className='flex gap-10 justify-center items-center flex-col lg:flex-row lg:items-start mx-5 py-10'>
 					<div className="lg:pt-24 ">
-						<div className="transition duration-500 hover:scale-110">
-							<Image src="/edificios.jpg" width={320} height={384} alt="edificios" />
-						</div>
+							<ImageComponent src="/edificios.jpg" width={320} height={384} alt="edificios" scale />
 					</div>
 					<div className="">
-						<div className="transition duration-500 hover:scale-110">
-							<Image src="/persona-puente.jpg" width={320} height={384} alt="persona y un puente" />
-						</div>
+							<ImageComponent src="/persona-puente.jpg" width={320} height={384} alt="persona y un puente" scale/>
 					</div>
 					<div className="lg:pt-36 ">
-						<div className='transition duration-500 hover:scale-110'>
-							<Image src="/paraguas.jpg" width={320} height={384} alt="paraguas" />
-						</div>
+							<ImageComponent src="/paraguas.jpg" width={320} height={384} alt="paraguas" scale/>
 					</div>
 				</div>
 

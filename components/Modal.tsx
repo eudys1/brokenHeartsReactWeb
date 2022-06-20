@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 
 
 interface MoralProps {
@@ -25,7 +25,9 @@ interface MoralProps {
 export default function Modal({titleButtonCloseModal="X", showCrossCloseModal = true, elementShownWhenModalIsClose, cerrarModal = true, modalTitle, modalDescription, openModalButtonTitle, cancelButtonTitle, buttonOnClickCancel, successButtonTitle, buttonOnClickSuccess, classNameWhenModalOpen = "", classNameOfBackground = "", classNameWhenModalClose = "", DescriptionClassNameWhenModalOpen = "", style = {} }: MoralProps) {
 
     const [isOpen, setIsOpen] = useState(false)
-
+    //to avoid error of focusable element
+    const completeButtonRef = useRef(null)
+    
     function closeModal() {
         setIsOpen(false)
     }
@@ -41,7 +43,7 @@ export default function Modal({titleButtonCloseModal="X", showCrossCloseModal = 
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={cerrarModal ? closeModal : openModal}>
+                <Dialog as="div" className="relative z-10" onClose={cerrarModal ? closeModal : openModal} initialFocus={completeButtonRef}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -74,7 +76,7 @@ export default function Modal({titleButtonCloseModal="X", showCrossCloseModal = 
                                         {modalTitle}
                                         
 
-                                            <div className=' z-50 justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>{showCrossCloseModal && titleButtonCloseModal}</div>
+                                            <div ref={completeButtonRef} className=' z-50 justify-self-end hover:cursor-pointer hover:hover:text-red-700' onClick={closeModal}>{showCrossCloseModal && titleButtonCloseModal}</div>
                                         
                                     </Dialog.Title>
                                     {/* } */}
