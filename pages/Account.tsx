@@ -1,10 +1,7 @@
 import Login from "../components/Login";
 import Head from 'next/head'
-import Header from "../components/Header";
 import Dashboard from "../components/Dashboard";
 import { useUserAuth } from "../context/authContext";
-import { getAuth } from "firebase/auth";
-import { firebaseInit } from "../firebase";
 
 
 

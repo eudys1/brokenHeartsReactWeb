@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import Gallery from '../components/Gallery';
-import Header from "../components/Header";
-import Slider from "react-slick";
 import Image from 'next/image';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

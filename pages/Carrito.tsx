@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Header from "../components/Header";
-import { useUserAuth } from '../context/authContext';
 import { useShopingCart } from '../context/shopingCartContext';
 import Router from 'next/router';
 import NoSsr from '../components/NoSsr';
@@ -8,7 +6,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Carrito() {
-    const { user }: any = useUserAuth();
     const { shopingCart, defaultSetShopingCart, getTotalPrice, getNumberOfDifferentItems }: any = useShopingCart();
     const [quantity, setQuantity] = useState(1);
 

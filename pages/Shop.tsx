@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
-import Header from "../components/Header";
 import Modal from '../components/Modal';
 import NewProductForm from '../components/NewProductForm';
 
