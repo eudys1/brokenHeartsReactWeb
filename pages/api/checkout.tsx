@@ -15,8 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // payment_method_types: ['card'],
             mode: 'payment',
             locale: 'es',
-            success_url: '/success',
-            cancel_url: '/cancel',
+            success_url: `${req.headers.origin}/success`,
+            cancel_url: `${req.headers.origin}/cancel`,
             line_items: body,
             shipping_address_collection: {
                 allowed_countries: ['ES'],
