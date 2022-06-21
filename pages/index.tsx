@@ -73,7 +73,7 @@ export default function Home() {
 			<div className="w-4/5 mx-5 lg:mx-auto py-10 my-5 flex border-t-2 border-zinc-300  flex-col items-center	font-['Arial'] text-[18px] text-center">
 				<p>Para más información sobre reservas de sesiones, próximos</p>
 				<p>projectos y más visita mi Instagram o constacanos usando el formulario de arriba.</p>
-				<p>También puedes visitar nuestra <Link href="/Shop"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> y ver el merch de la marca</p>
+				<p>También puedes visitar nuestra <Link href="/Tienda"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> y ver el merch de la marca</p>
 				<p>que tenemos disponible.</p>
 			</div>
 

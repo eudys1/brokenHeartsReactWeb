@@ -93,7 +93,7 @@ export default function Carrito() {
             <div className="w-[80%] mx-auto   ">
                 {Object.keys(shopingCart).length === 0
                     ?
-                    <p className='text-xl text-center lg:mt-32'>El carrito está vacío, vuelve a la <Link href="/Shop"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> para ver todos nuestros productos disponibles.</p>
+                    <p className='text-xl text-center lg:mt-32'>El carrito está vacío, vuelve a la <Link href="/Tienda"><a className='text-[#2286FF] cursor-pointer hover:text-[#224877]'>Tienda</a></Link> para ver todos nuestros productos disponibles.</p>
                     :
                     <div className="flex flex-col lg:flex-row shadow-lg rounded-lg overflow-hidden">
                         <div className='lg:w-3/4 bg-slate-50 p-5 flex flex-col divide-y-2 justify-center'>

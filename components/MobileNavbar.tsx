@@ -23,9 +23,9 @@ export default function MobileNavbar() {
                 </Link>
                 
                 <Link href="/" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad] " >Inicio</a></Link>
-                <Link href="/Photografy" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad]" >Fotografía</a></Link>
-                <Link href="/Shop" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad]" >Tienda</a></Link>
-                <Link href="/Account" ><a onClick={toggleHandler} className=" hover:text-[#b8b7ad]" > Cuenta</a></Link>
+                <Link href="/Fotografia" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad]" >Fotografía</a></Link>
+                <Link href="/Tienda" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad]" >Tienda</a></Link>
+                <Link href="/Cuenta" ><a onClick={toggleHandler} className=" hover:text-[#b8b7ad]" > Cuenta</a></Link>
                 <Link href="/Carrito" ><a onClick={toggleHandler} className="hover:text-[#b8b7ad]" >Carrito</a></Link>
             </Menu>
     );
