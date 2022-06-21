@@ -59,7 +59,7 @@ export default function Gallery() {
                 <form action="" className="w-fit mx-auto my-5">
                     <label>
                         <input type="file" onChange={handleUpload} className="hidden" />
-                        <span className="block w-16 h-16 text-5xl text-center text-[#2286FF] border-[#2286FF] rounded-full border-2  cursor-pointer hover:border-[#24599a] hover:text-[#24599a]">+</span>
+                        <span className="flex items-center justify-center w-16 h-16 text-5xl text-center text-[#2286FF] border-[#2286FF] rounded-full border-2  cursor-pointer hover:border-[#24599a] hover:text-[#24599a]">+</span>
                     </label>
                 </form>
             }
