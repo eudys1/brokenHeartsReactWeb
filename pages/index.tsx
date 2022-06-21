@@ -10,10 +10,10 @@ import ImageComponent from '../components/ImageComponent';
 export default function Home() {
 
 
-	if (typeof window !== 'undefined') {
-		localStorage.removeItem('shopingCart');
-		// console.log(localStorage.getItem("shopingCart"))
-	}
+	// if (typeof window !== 'undefined') {
+	// 	localStorage.removeItem('shopingCart');
+	// 	// console.log(localStorage.getItem("shopingCart"))
+	// }
 
 	return (
 		<div className=" ">
