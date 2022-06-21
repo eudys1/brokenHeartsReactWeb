@@ -10,10 +10,11 @@ export default function Carrito() {
     const [quantity, setQuantity] = useState(1);
 
     function handleQuantity(currentQuantity: any, currentItem: any) {
-
+        
+        
         //change quantity in shopingCart
         shopingCart.forEach((item: any) => {
-            if (item.productId === currentItem.productId) {
+            if (JSON.stringify(item) == JSON.stringify(currentItem)) {
                 item.quantity = Number(currentQuantity.target.value);
                 setQuantity(Number(currentQuantity.target.value));
             }
@@ -26,11 +27,9 @@ export default function Carrito() {
     function deleteProductFromCart(currentItem: any) {
 
         shopingCart.forEach((item: any, index: number) => {
-            console.log("item", item);
             if (JSON.stringify(item) === JSON.stringify(currentItem)) {
                 shopingCart.splice(index, 1);
             }
-            // JSON.stringify(item) === JSON.stringify(currentItem) && shopingCart.splice(index, 1);
         });
 
         defaultSetShopingCart(shopingCart);
